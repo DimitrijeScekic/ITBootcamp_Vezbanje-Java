@@ -1,0 +1,76 @@
+package com.mallocinc.ytm.testing.suites;
+
+import org.junit.BeforeClass;
+import org.junit.ClassRule;
+import org.junit.rules.ExternalResource;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
+
+import com.mallocinc.ytm.testing.config.TestConfig;
+import com.mallocinc.ytm.testing.nikola.testcase.CreateNewUserTestCase;
+import com.mallocinc.ytm.testing.nikola.testcase.TestCreateNewRole;
+
+@RunWith(Suite.class)
+
+@SuiteClasses({
+	
+      //  LogInOutTestCase.class,
+        CreateNewUserTestCase.class,
+        TestCreateNewRole.class,
+       /* TestCreateGroup.class,
+        TestDeleteGroupMember.class,
+        //TestIndexSearchGC.class,
+        TestContactFromLoginPage.class,
+       // MoveQuestionToOtherPool.class,
+        TestCreatePool.class,
+        TestSystemMail.class,
+        TestChangeStatusOfUsers.class,
+        TestRegisterTryout.class,
+        TestApproveRegRequest.class,
+        TestRegisterTryout.class,
+        TestDeclineRegRequest.class,
+        TestCreateProfiling.class,*/
+        
+})
+
+public class SuiteTestDimitrije extends Thread implements Runnable{
+	
+	public static Boolean suiteRunning = false;
+	@ClassRule
+	public static ExternalResource triggerSuiteRunning = new ExternalResource() {
+		@Override
+		protected void before() throws Throwable {
+			suiteRunning = true;
+		}
+	};
+	
+		
+	public boolean isActive() {
+		if (suiteRunning) {
+			return true;
+		} else
+			return false;
+	}
+	@BeforeClass 
+		webDriver.openPage(TestConfig.getTestUrl());
+	
+	
+	public String setupURL(){
+		String url = "https://gc-test.youtestme.com/";
+		return url;
+	}
+	
+	public String setupUser(){
+		String user = "selenium";
+		return user;
+	}
+	
+	public String setupPassword(){
+		String pass = "Admin12#";
+		return pass;
+	}
+
+
+		
+}

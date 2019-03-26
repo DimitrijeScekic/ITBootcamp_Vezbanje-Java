@@ -1,0 +1,19 @@
+package glavni;
+
+public class Pocetna {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int a = 5, b = 10, c ;
+		double ab, pi = 3.14 ;
+		boolean danasjesuncandan = false;
+		char slovoS = 's';
+		String rec = "Danas";
+		c = a + b;
+		
+		
+	System.out.print();
+	
+	}
+
+}

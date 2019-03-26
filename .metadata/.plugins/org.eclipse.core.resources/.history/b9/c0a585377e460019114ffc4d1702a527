@@ -1,0 +1,94 @@
+package vezbanjeZaTest;
+
+/* Vozilo(Apstraktna klasa) poseduje jedinstveni identifikator koji se dodeljuje automatski prilikom kreiranja.
+ *  Vozilo poseduje prosecnu potrosnju koja se dodeljuje prilikom kreiranja i ne moze da se promeni ali se moze dohvatiti.
+ *   Vozilo se stvara bez goriva, koje se posle moze dodati, oduzeti i dohvatiti.
+ *    Moguce je da vozilo predje zadat broj kilometara.
+ *     Vozilo poseduje jednoslovnu oznaku koja moze da se dohvati.
+ *      Moze da se ispise u formatu OZNAKA[ID{PROSECNA POTROSNJA}:TRENUTNO_GORIVO]
+ */
+/*
+Automobil je vozilo koje poseduje i registracioni broj. 
+Automobil kada predje zadat broj kilometara ono potrosi goriva jednako formuli km*prosecna_potrosnja. 
+Takodje je potrebno vratiti informaciju koliko je goriva potroseno. 
+Auto ne moze da predje zadat broj kilometara ako nema dovoljno goriva za to. 
+Jednoslovna oznaka je A. Moze da se ispise u formatu VOZILO:REG_BROJ
+
+Kamion je vozilo koje poseduje i serijski broj. 
+Kamion kada predje zadat broj kilometara ono potrosi goriva jednako formuli 4*km*prosecna_potrosnja.
+Takodje je potrebno vratiti informaciju koliko je goriva potroseno.
+Kamion ne moze da predje zadat broj kilometara ako nema dovoljno goriva za to.
+Jednoslovna oznaka je K. Moze da se ispise u formatu VOZILO:SER_BROJ
+
+Napisati glavni program koji testira rad ovih klasa. */
+
+public abstract class Vozilo {
+
+	public static int uid = 0;
+	private int id = 0;
+	private double prosecnaPotrosnja ;
+	private double gorivo;
+	final char oznaka ;
+	private int daljina;
+	
+	/*public Vozilo(double prosecnaPotrosnja) {
+		this.id = ++ uid;
+		this.prosecnaPotrosnja = prosecnaPotrosnja;
+		this.gorivo = 0;
+		this.daljina = 0 ;
+		this.oznaka = oznaka;
+	}
+
+	public abstract double predjiPut(int daljina);
+	
+	//public abstract double potrosenoGoriva();
+	
+
+	public int getId() {
+		return id;
+	}
+
+	public int getDaljina() {
+		return daljina;
+	}
+
+	public void setDaljina(int daljina) {
+		this.daljina = daljina;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public double getGorivo() {
+		return gorivo;
+	}
+
+	public abstract char getOznaka();
+
+	public double getProsecnaPotrosnja() {
+		return prosecnaPotrosnja;
+	}
+	
+	public void addGorivo(int value) {
+		if (value >= 0)
+			gorivo += value;
+	}
+
+	public void subGorivo(int value) {
+		if (value >= 0 && value <= this.gorivo)
+			gorivo -= value;
+	}
+	
+	public String toString() {
+
+		StringBuilder sb = new StringBuilder(this.getOznaka());
+		sb.append("[");
+		sb.append(this.getId()).append("{");
+		sb.append(this.getProsecnaPotrosnja()).append("}:");
+		sb.append(trenutnoGoriva()).append("]");
+		return sb.toString();
+	}
+	public abstract double trenutnoGoriva();
+	*/
+}

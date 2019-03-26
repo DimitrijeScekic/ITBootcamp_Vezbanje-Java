@@ -1,0 +1,17 @@
+package interfejs;
+
+import java.sql.SQLException;
+
+public class Main2 {
+
+	public static void main(String[] args) {
+
+		DBBanka2 database = new DBBanka2("jdbc:sqlite:Banka.db");
+
+		try {
+			database.printNameAdress();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+}

@@ -1,0 +1,5 @@
+package stariPaket;
+
+public interface IChangeable {
+
+}

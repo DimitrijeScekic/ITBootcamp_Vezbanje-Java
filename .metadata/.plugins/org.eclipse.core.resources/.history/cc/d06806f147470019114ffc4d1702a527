@@ -1,0 +1,35 @@
+package noviPaket;
+
+public class Avion implements IMovable {
+
+	@Override
+	public void printLocation() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void moveUP(double value) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void moveDown(double value) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void moveRight(double value) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void moveLeft(double value) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,2094 @@
+package com.mallocinc.ytm.testing.core.helpers;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+import com.mallocinc.ytm.testing.core.WebDriverExtended;
+import com.mallocinc.ytm.testing.core.pages.ProfilesPage;
+import com.mallocinc.ytm.testing.util.UtilRandomizer;
+
+/**
+ * Convinent methods for using the Login page.
+ * 
+ * @author Danilo
+ * 
+ */
+public class ProfilesPageTestHelper extends ProfilesPage {
+
+	public static final int COUNTRY_USA = 2;
+	public static final int PASSWORD_MANUAL = 0;
+	public static final int PASSWORD_GENERATED = 0;
+
+	private static WebDriverExtended webDriverExtended;
+	public WebDriver driver;
+
+	public ProfilesPageTestHelper(WebDriverExtended webDriverExtended) {
+		this.webDriverExtended = webDriverExtended;
+	}
+
+	public void selectPermissionList(int selectTableId, int selectPermissionId) throws Exception {
+		String permission = "//div[@id='rolesForm:rolesTable:" + selectTableId + ":permissionTable:"
+				+ selectPermissionId + ":roles']/div[2]";
+		webDriverExtended.click(By.xpath(permission));
+	}
+
+	public void selectNumberOfResults(String Results) throws Exception {
+		System.out.println("Setting result show to " + Results);
+		webDriverExtended.numberOfResults(ProfilesPage.SELECT_NUMBER_OF_RESULTS, Results);
+	}
+
+	// CREATE NEW USER
+
+	public void pressButtonListOfAllUsers() throws Exception {
+		System.out.println("Press button 'List of all users '");
+		webDriverExtended.click(ProfilesPage.SELECT_LIST_OF_ALL_USERS);
+	}
+
+	public void pressButtonUserCreatedByMe() throws Exception {
+		System.out.println("Press button 'Users created by me '");
+		webDriverExtended.click(ProfilesPage.BUTTON_USERS_CREATED_BY_ME);
+	}
+
+	public void pressNewUserPanel() throws Exception {
+		System.out.println("Press new user button");
+		Thread.sleep(2000);
+		webDriverExtended.click(ProfilesPage.BUTTON_NEW_USER_PANEL);
+	}
+
+	public void typeUsername(String value) throws Exception {
+		System.out.println("Typing user name ...");
+		webDriverExtended.type(ProfilesPage.INPUT_NEW_USERNAME, value);
+	}
+
+	public void typeEmail(String value) throws Exception {
+		System.out.println("Typing user email ...");
+		webDriverExtended.type(ProfilesPage.INPUT_EMAIL, value);
+	}
+
+	public void typeEmail() throws Exception {
+		System.out.println("Typing user email ...");
+		webDriverExtended.type(ProfilesPage.INPUT_EMAIL, webDriverExtended.generateHash() + "@youtestme.com");
+	}
+
+	public void typeFirstName(String value) throws Exception {
+		System.out.println("Typing user first name ...");
+		webDriverExtended.type(ProfilesPage.INPUT_NEW_FIRST_NAME, value);
+	}
+
+	public void typeFirstName() throws Exception {
+		System.out.println("Typing user first name ...");
+		webDriverExtended.type(ProfilesPage.INPUT_NEW_FIRST_NAME, webDriverExtended.generateHash() + "AutoQA Bot");
+	}
+
+	public void typeLastName(String value) throws Exception {
+		System.out.println("Typing user last name ...");
+		webDriverExtended.type(ProfilesPage.INPUT_NEW_LAST_NAME, value);
+	}
+
+	public void typeLastName() throws Exception {
+		System.out.println("Typing user last name ...");
+		webDriverExtended.type(ProfilesPage.INPUT_NEW_LAST_NAME, webDriverExtended.generateHash() + "AutoQA Bot");
+	}
+
+	public void typeBirth(String value) throws Exception {
+		System.out.println("Typing user birth date ...");
+		webDriverExtended.type(ProfilesPage.INPUT_NEW_BIRTH_DATE, value);
+		// webDriverExtended.click(By.id("newForm:birth_input"));
+		// webDriverExtended.click(By.xpath("//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[7]/a"));
+		webDriverExtended.click(By.xpath("//*[@id=\'newForm:newProfGrid\']/tbody/tr[1]/td[1]"));
+	}
+
+	public void selectGender(int optionNum) throws Exception {
+		System.out.println("Selecting gender...");
+		webDriverExtended.click(By.xpath("//*[@id='newForm:gen_label']"));
+		Thread.sleep(2000);
+		webDriverExtended.click(By.xpath(("//*[@id='newForm:gen_" + optionNum + "']")));
+
+	}
+
+	public void typeSemester(String value) throws Exception {
+		webDriverExtended.type(ProfilesPage.INPUT_SEMESTER, value);
+	}
+
+	public void typeYear(String value) throws Exception {
+		webDriverExtended.type(ProfilesPage.INPUT_YEAR, value);
+	}
+
+	public void selectRoleFromMenu(int optionNum) throws Exception {
+		System.out.println("Selecting role from menu ...");
+		webDriverExtended.click(By.xpath("//*[@id='newForm:roles_label']"));
+		webDriverExtended.click(By.xpath(("//*[@id='newForm:roles_" + optionNum + "']")));
+
+	}
+
+	public void selectStatusFromMenu(int optionNum) throws Exception {
+		System.out.println("Selecting status from menu ...");
+		webDriverExtended.click(By.xpath("//*[@id='newForm:status_label']"));
+		webDriverExtended.click(By.xpath(("//*[@id='newForm:status_" + optionNum + "']")));
+	}
+
+	public void selectGeneratedPasswordType() throws Exception {
+		System.out.println("Selecting generated password type ...");
+		webDriverExtended.click(By.xpath("//*[@id=\'newForm:options_label\']"));
+		webDriverExtended.click(By.xpath("//*[@id=\'newForm:options_0\']"));
+	}
+
+	public void typeDayPhone(String value) throws Exception {
+		System.out.println("Typing user phone number ");
+		webDriverExtended.type(ProfilesPage.INPUT_DAYTIME_PHONE, value);
+	}
+
+	public void typePassExp(String value) throws Exception {
+		System.out.println("Typing password epire ...");
+		webDriverExtended.type(ProfilesPage.INPUT_PASSWORD_EXPIRE, value);
+		// webDriverExtended.click(By.id("newForm:passex_input"));
+		// webDriverExtended.click(By.xpath("//*[@id=\'ui-datepicker-div\']/table/tbody/tr[5]/td[2]/a"));
+		webDriverExtended.click(By.xpath("//*[@id=\'newForm:newProfGrid\']/tbody/tr[1]/td[1]"));
+	}
+
+	public void PressCreateUser() throws Exception {
+		System.out.println("Creating new user...");
+		webDriverExtended.click(ProfilesPage.CREATE_USER_BUTTON);
+		System.out.println("New user successfully created!");
+	}
+
+	public void pressExportUsers() throws Exception {
+		System.out.println("Press button export user ...");
+		webDriverExtended.click(ProfilesPage.BUTTON_EXPORT_USERS);
+	}
+
+	public void selectShowDeletedUsers() throws Exception {
+		System.out.println("Showing deleted users");
+		webDriverExtended.click(ProfilesPage.SHOW_DELETED_USERS);
+	}
+
+	// ROLES
+	public void pressShowRoles() throws Exception {
+		webDriverExtended.click(ProfilesPage.OPEN_ROLES);
+	}
+
+	public void pressNewRole() throws Exception {
+		webDriverExtended.waitForElementPresent(ProfilesPage.BUTTON_NEW_ROLE);
+		webDriverExtended.click(ProfilesPage.BUTTON_NEW_ROLE);
+	}
+
+	public void typeRoleName(String value) throws Exception {
+		System.out.println("Typing role name ...");
+		webDriverExtended.type(ProfilesPage.INPUT_ROLE_NAME, value);
+	}
+
+	public void pressChooseARole(int option) throws Exception {
+		System.out.println("Selecting role from drop-down menu ");
+		webDriverExtended.click(By.id("regForm:roles_label"));
+		Thread.sleep(1000);
+		webDriverExtended.click(By.id("regForm:roles_2"));
+	}
+
+	public void typeRoleCode(String value) throws Exception {
+		System.out.println("Typing role code ...");
+		webDriverExtended.type(ProfilesPage.ROLE_CODE, value);
+	}
+
+	public void typeRoleDescription(String value) throws Exception {
+		System.out.println("Typing role description ...");
+		webDriverExtended.type(ProfilesPage.ROLE_DESCRIPTION, value);
+	}
+
+	public void pressSaveRoles() throws Exception {
+		System.out.println("Press save role ...");
+		webDriverExtended.waitForElementPresent(ProfilesPage.BUTTON_ROLE_SAVE);
+		webDriverExtended.click(ProfilesPage.BUTTON_ROLE_SAVE);
+	}
+
+	public void pressRoleReset() throws Exception {
+		System.out.println("Press reset role ...");
+		webDriverExtended.waitForElementPresent(ProfilesPage.BUTTON_ROLE_RESET);
+		webDriverExtended.click(ProfilesPage.BUTTON_ROLE_RESET);
+	}
+
+	public void pressRoleDelete() throws Exception {
+		System.out.println("Press delete role ...");
+		webDriverExtended.waitForElementPresent(ProfilesPage.BUTTON_DELETE_ROLE);
+		webDriverExtended.click(ProfilesPage.BUTTON_DELETE_ROLE);
+	}
+
+	public void pressUpdateRole() throws Exception {
+		System.out.println("Press update role ...");
+		webDriverExtended.waitForElementPresent(ProfilesPage.BUTTON_UPDATE_ROLE);
+		webDriverExtended.click(ProfilesPage.BUTTON_UPDATE_ROLE);
+	}
+
+	// PERMISSIONS PROFILES USER
+
+	public void selectLogIn() throws Exception {
+		System.out.println("Select Log in ...");
+		selectPermissionList(PERMISSION_PROFILES_GROUP, PERMISSION_LOG_IN);
+	}
+
+	public void selectManageRole() throws Exception {
+		System.out.println("Select manage role ...");
+		selectPermissionList(PERMISSION_PROFILES_GROUP, PERMISSION_MANAGE_A_ROLE);
+	}
+
+	public void selectGrantRolesToUsers() throws Exception {
+		System.out.println("Select grant roles to users ...");
+		selectPermissionList(PERMISSION_PROFILES_GROUP, PERMISSION_GRANT_ROLES_TO_USERS);
+	}
+
+	public void selectManageSubscription() throws Exception {
+		System.out.println("Select manage subscriptions ...");
+		selectPermissionList(PERMISSION_PROFILES_GROUP, PERMISSION_MANAGE_SUBSCRIPTION);
+	}
+
+	public void selectManageSystemSettings() throws Exception {
+		System.out.println("Select manage system settings ...");
+		selectPermissionList(PERMISSION_PROFILES_GROUP, PERMISSION_MANAGE_SYSTEM_SETTINGS);
+	}
+
+	public void selectAccessTheProfilesPage() throws Exception {
+		System.out.println("Select access the profiles page ...");
+		selectPermissionList(PERMISSION_PROFILES_GROUP, PERMISSION_ACCESS_THE_PROFILES_PAGE);
+	}
+
+	public void selectViewListOfAllUsers() throws Exception {
+		System.out.println("Select view list off all users ...");
+		selectPermissionList(PERMISSION_PROFILES_GROUP, PERMISSION_VIEW_A_LIST_OF_ALL_USERS);
+	}
+
+	public void selectManageUsersStatus() throws Exception {
+		System.out.println("Select manage register requests ...");
+		selectPermissionList(PERMISSION_PROFILES_GROUP, PERMISSION_MANAGE_USERS_STATUS);
+	}
+
+	public void selectExportUsersList() throws Exception {
+		System.out.println("Select export users list ...");
+		selectPermissionList(PERMISSION_PROFILES_GROUP, PERMISSION_EXPORT_USERS_TO_EXCEL);
+
+	}
+
+	public void selectViewDeletedUsers() throws Exception {
+		System.out.println("Select view deleted users ...");
+		selectPermissionList(PERMISSION_PROFILES_GROUP, PERMISSION_VIEW_DELETED_USERS);
+	}
+
+	public void selectManageRegistrationRequests() throws Exception {
+		System.out.println("Select manage register requests ...");
+		selectPermissionList(PERMISSION_PROFILES_GROUP, PERMISSION_MANAGE_REGISTRATION_REQUESTS);
+	}
+
+	public void selectCreateNewUser() throws Exception {
+		System.out.println("Select create new user ...");
+		selectPermissionList(PERMISSION_PROFILES_GROUP, PERMISSION_CREATE_NEW_USER);
+	}
+
+	public void selectViewOtherUsersPersonalInfo() throws Exception {
+		System.out.println("Select view other users personal info ...");
+		selectPermissionList(PERMISSION_PROFILES_GROUP, PERMISSION_VIEW_OTHER_USERS_PERSONAL_INFO);
+	}
+
+	public void selectChangeYourPersonalInfo() throws Exception {
+		System.out.println("Select change your personal info ...");
+		selectPermissionList(PERMISSION_PROFILES_GROUP, PERMISSION_CHANGE_YOUR_PERSONAL_INFO);
+	}
+
+	public void selectChangeOtherUsersPersonalInfo() throws Exception {
+		System.out.println("Select change other users personal info ...");
+		selectPermissionList(PERMISSION_PROFILES_GROUP, PERMISSION_CHANGE_OTHER_USERS_PERSONAL_INFO);
+	}
+
+	public void selectChangeYourPassword() throws Exception {
+		System.out.println("Select change your password ...");
+		selectPermissionList(PERMISSION_PROFILES_GROUP, PERMISSION_CHANGE_YOUR_PASSWORD);
+	}
+
+	public void selectChangeOtherUsersPassword() throws Exception {
+		System.out.println("Select change other users password ...");
+		selectPermissionList(PERMISSION_PROFILES_GROUP, PERMISSION_CHANGE_OTHER_USERS_PASSWORD);
+
+	}
+
+	public void selectAccessCoursesPage() throws Exception {
+		System.out.println("Select access courses page ...");
+		selectPermissionList(PERMISSION_COURSES_GROUP, PERMISSION_ACCESS_THE_COURSES_PAGE);
+	}
+
+	public void selectViewAllCoursesAndClasses() throws Exception {
+		System.out.println("Select view all courses and classes ...");
+		selectPermissionList(PERMISSION_COURSES_GROUP, PERMISSION_VIEW_ALL_COURSES_AND_CLASSES);
+	}
+
+	public void selectCreateCoursesAndClasses() throws Exception {
+		System.out.println("Select create courses and classes ...");
+		selectPermissionList(PERMISSION_COURSES_GROUP, PERMISSION_CREATE_COURSES_AND_CLASSES);
+	}
+
+	public void selecManageAnyCoursesOrClasses() throws Exception {
+		System.out.println("Select manage any courses and classes ...");
+		selectPermissionList(PERMISSION_COURSES_GROUP, PERMISSION_MANAGE_ANY_COURSE_OR_CLASS);
+	}
+
+	public void selectAccessPoolsPage() throws Exception {
+		System.out.println("Select acces pools page ...");
+		selectPermissionList(PERMISSION_POOLS_GROUP, PERMISSION_ACCESS_THE_POOLS_PAGE);
+	}
+
+	public void selectCreatePool() throws Exception {
+		System.out.println("Select create pool ...");
+		selectPermissionList(PERMISSION_POOLS_GROUP, PERMISSION_CREATE_A_POOL);
+	}
+
+	public void selectManageAnyPool() throws Exception {
+		System.out.println("Select manage any pool ...");
+		selectPermissionList(PERMISSION_POOLS_GROUP, PERMISSION_MANAGE_ANY_POOL);
+	}
+
+	public void selectAccessQuizzesPage() throws Exception {
+		System.out.println("Select access quizzes page ...");
+		selectPermissionList(PERMISSION_QUIZZES_GROUP, PERMISSION_ACCESS_THE_QUIZZES_PAGE);
+	}
+
+	public void selectCreateQuiz() throws Exception {
+		System.out.println("Select create quiz ...");
+		selectPermissionList(PERMISSION_QUIZZES_GROUP, PERMISSION_CREATE_A_QUIZ);
+	}
+
+	public void selectCreateAcertificate() throws Exception {
+		System.out.println("Select create a certificate ...");
+		selectPermissionList(PERMISSION_QUIZZES_GROUP, PERMISSION_CREATE_A_CERTIFICATE);
+	}
+
+	public void selectAssignGroupMembers() throws Exception {
+		System.out.println("Select assign group members ...");
+		selectPermissionList(PERMISSION_QUIZZES_GROUP, PERMISSION_ASSIGN_GROUP_MEMBERS);
+	}
+
+	public void selectFullyManagePersonalTestsAndSurvey() throws Exception {
+		System.out.println("Select permission fully manage personal tests and survey ...");
+		selectPermissionList(PERMISSION_QUIZZES_GROUP, PERMISSION_FULLY_MANAGE_PERSONAL_TESTS_AND_SURVEY);
+	}
+
+	public void selectManageAnyTestsSurveyOrTraining() throws Exception {
+		System.out.println("Select permission manage any tests survey or training ...");
+		selectPermissionList(PERMISSION_QUIZZES_GROUP, PERMISSION_MANAGE_ANY_TEST_SURVEY_OR_TRAINING);
+	}
+
+	public void selectViewQuestions() throws Exception {
+		System.out.println("Select view questions ...");
+		selectPermissionList(PERMISSION_QUIZZES_GROUP, PERMISSION_VIEW_QUESTIONS);
+	}
+
+	public void selectCreateAquizTemplate() throws Exception {
+		System.out.println("Select create a quiz template ...");
+		selectPermissionList(PERMISSION_QUIZZES_GROUP, PERMISSION_CREATE_A_QUIZ_TEMPLATE);
+	}
+
+	public void selectSetAquizTemplateToBePublic() throws Exception {
+		System.out.println("Select set a quiz template to be public ...");
+		selectPermissionList(PERMISSION_QUIZZES_GROUP, PERMISSION_SET_A_QUIZ_TEMPLATE_TO_BE_PUBLIC);
+	}
+
+	public void checkUser() throws Exception {
+		System.out.println("User check");
+		webDriverExtended.click(ProfilesPage.CHECK_USER);
+
+	}
+
+	public void createNewRole() throws Exception {
+		pressNewRole();
+		Thread.sleep(1000);
+		typeRoleName(webDriverExtended.generateHash());
+		typeRoleCode(webDriverExtended.generateUppercaseStringForCode());
+		typeRoleDescription(webDriverExtended.generateHash());
+		webDriverExtended.scrollUnderElement(BUTTON_ROLE_SAVE);
+		pressSaveRoles();
+		Thread.sleep(3000);
+	}
+
+	public void manageRolesPermissions() throws Exception {
+		pressNewRole();
+		Thread.sleep(1000);
+		typeRoleCode(webDriverExtended.generateUppercaseStringForCode());
+		typeRoleName(webDriverExtended.generateHash());
+		typeRoleDescription(webDriverExtended.generateHash());
+		webDriverExtended.scrollUnderElement(BUTTON_ROLE_SAVE);
+		pressRoleReset();
+		Thread.sleep(2000);
+		webDriverExtended.scrollUnderElement(BUTTON_NEW_ROLE);
+		Thread.sleep(1000);
+		typeRoleCode(webDriverExtended.generateUppercaseStringForCode());
+		typeRoleName(webDriverExtended.generateHash());
+		typeRoleDescription(webDriverExtended.generateHash());
+		selectLogIn();
+		Thread.sleep(1000);
+		selectManageRole();
+		;
+		webDriverExtended.scrollUnderElement(
+				By.xpath("//*[@id=\'rolesForm:rolesTable:0:permissionTable:2:roles\']/div[2]/span"));
+		Thread.sleep(1000);
+		selectGrantRolesToUsers();
+		Thread.sleep(1000);
+		selectManageSubscription();
+		Thread.sleep(1000);
+		selectManageSystemSettings();
+		Thread.sleep(1000);
+		webDriverExtended.scrollUnderElement(
+				By.xpath("//*[@id=\'rolesForm:rolesTable:0:permissionTable:5:roles\']/div[2]/span"));
+		Thread.sleep(1000);
+		selectAccessTheProfilesPage();
+		Thread.sleep(1000);
+		selectViewListOfAllUsers();
+		Thread.sleep(1000);
+		selectManageUsersStatus();
+		Thread.sleep(1000);
+		selectExportUsersList();
+		Thread.sleep(1000);
+		webDriverExtended.scrollUnderElement(
+				By.xpath("//*[@id=\'rolesForm:rolesTable:0:permissionTable:8:roles\']/div[2]/span"));
+		selectViewDeletedUsers();
+		Thread.sleep(1000);
+		selectManageRegistrationRequests();
+		Thread.sleep(1000);
+		selectCreateNewUser();
+		Thread.sleep(1000);
+		selectViewOtherUsersPersonalInfo();
+		Thread.sleep(1000);
+		webDriverExtended.scrollUnderElement(
+				By.xpath("//*[@id=\'rolesForm:rolesTable:0:permissionTable:11:roles\']/div[2]/span"));
+		Thread.sleep(1000);
+		selectChangeYourPersonalInfo();
+		Thread.sleep(1000);
+		selectChangeOtherUsersPersonalInfo();
+		Thread.sleep(1000);
+		selectChangeYourPassword();
+		Thread.sleep(1000);
+		webDriverExtended.scrollUnderElement(
+				By.xpath("//*[@id=\'rolesForm:rolesTable:0:permissionTable:14:roles\']/div[2]/span"));
+		Thread.sleep(1000);
+		selectChangeOtherUsersPassword();
+		Thread.sleep(1000);
+		selectAccessCoursesPage();
+		Thread.sleep(1000);
+		webDriverExtended.scrollUnderElement(
+				By.xpath("//*[@id=\'rolesForm:rolesTable:0:permissionTable:16:roles\']/div[2]/span"));
+		Thread.sleep(1000);
+		selectViewAllCoursesAndClasses();
+		Thread.sleep(1000);
+		selectCreateCoursesAndClasses();
+		Thread.sleep(1000);
+		selecManageAnyCoursesOrClasses();
+		Thread.sleep(1000);
+		webDriverExtended.scrollUnderElement(
+				By.xpath("//*[@id=\'rolesForm:rolesTable:1:permissionTable:2:roles\']/div[2]/span"));
+		Thread.sleep(1000);
+		selectAccessPoolsPage();
+		Thread.sleep(1000);
+		selectCreatePool();
+		Thread.sleep(1000);
+		selectManageAnyPool();
+		Thread.sleep(1000);
+		webDriverExtended
+				.scrollUnderElement(By.xpath("//*[@id=\'rolesForm:rolesTable:2:permissionTable:1:roles\']/div[2]"));
+		Thread.sleep(1000);
+		selectAccessQuizzesPage();
+		Thread.sleep(1000);
+		Thread.sleep(1000);
+		selectCreateQuiz();
+		Thread.sleep(1000);
+		webDriverExtended
+				.scrollUnderElement(By.xpath("//*[@id=\'rolesForm:rolesTable:3:permissionTable:1:roles\']/div[2]"));
+		Thread.sleep(1000);
+		selectCreateAcertificate();
+		Thread.sleep(1000);
+		selectAssignGroupMembers();
+		Thread.sleep(1000);
+		selectFullyManagePersonalTestsAndSurvey();
+		Thread.sleep(1000);
+		webDriverExtended
+				.scrollUnderElement(By.xpath("//*[@id=\'rolesForm:rolesTable:3:permissionTable:5:roles\']/div[2]"));
+		Thread.sleep(1000);
+		selectManageAnyTestsSurveyOrTraining();
+		Thread.sleep(1000);
+		selectViewQuestions();
+		Thread.sleep(1000);
+		webDriverExtended
+				.scrollUnderElement(By.xpath("//*[@id=\'rolesForm:rolesTable:3:permissionTable:8:roles\']/div[2]"));
+		Thread.sleep(1000);
+		selectCreateAquizTemplate();
+		Thread.sleep(1000);
+		selectSetAquizTemplateToBePublic();
+		Thread.sleep(1000);
+		webDriverExtended.scrollUnderElement(BUTTON_ROLE_SAVE);
+		pressSaveRoles();
+		Thread.sleep(3000);
+		webDriverExtended.scrollUnderElement(BUTTON_DELETE_ROLE);
+		Thread.sleep(1000);
+		selectSetAquizTemplateToBePublic();
+		Thread.sleep(1000);
+		pressUpdateRole();
+		Thread.sleep(3000);
+		webDriverExtended.scrollUnderElement(BUTTON_DELETE_ROLE);
+		Thread.sleep(1000);
+		pressRoleDelete();
+		Thread.sleep(1000);
+		pressButtonConfirm();
+		Thread.sleep(3000);
+	}
+
+	// REGISTRATION USERS
+
+	public void pressRegistrationRequest() throws Exception {
+		System.out.println("Press button registration request ");
+		webDriverExtended.click(ProfilesPage.BUTTON_REGISTRATION_REQUEST);
+	}
+
+	public void checkRequestUser() throws Exception {
+		System.out.println("Check request user ");
+		webDriverExtended.click(ProfilesPage.CHECK_REQUEST_USER);
+	}
+
+	public void pressActionButton() throws Exception {
+		System.out.println("Press action button ");
+		webDriverExtended.click(ProfilesPage.ACTION);
+	}
+
+	public void setToApprove() throws Exception {
+		System.out.println("Set to approve ");
+		webDriverExtended.click(ProfilesPage.SET_TO_APPROVE);
+	}
+
+	public void setToDecline() throws Exception {
+		System.out.println("Set to decline ");
+		webDriverExtended.click(ProfilesPage.SET_TO_DECLINE);
+	}
+
+	// SHOW USERS
+
+	public void selectStatusByPending() throws Exception {
+		System.out.println("Select users by pending status ...");
+		webDriverExtended.click(ProfilesPage.SELECT_BY_STATUS_BUTTON);
+		Thread.sleep(1000);
+		webDriverExtended.click(ProfilesPage.SELECT_BY_STATUS_PENDING);
+		Thread.sleep(1000);
+	}
+
+	public void showListOfAllUsers() throws Exception {
+		System.out.println("Select list of all users ...");
+		webDriverExtended.click(ProfilesPage.SELECT_LIST_OF_ALL_USERS);
+	}
+
+	public void pressShowUsers() throws Exception {
+		System.out.println("Showing users...");
+		webDriverExtended.click(ProfilesPage.BUTTON_SHOW_USERS);
+		webDriverExtended.scrollWithDownKey("//div[@id='usersForm:showDeletedUsers']/div[2]", 2, true);
+	}
+
+	public void setStatusToActive() throws Exception {
+		System.out.println("Set users status to active ...");
+		webDriverExtended.click(ProfilesPage.BUTTON_SET_STATUS_TO);
+		webDriverExtended.click(ProfilesPage.SET_STATUS_TO_ACTIVE);
+		Thread.sleep(2000);
+
+	}
+
+	public void setStatusToLocked() throws Exception {
+		System.out.println("Set users status to locked ...");
+		webDriverExtended.click(ProfilesPage.BUTTON_SET_STATUS_TO);
+		webDriverExtended.click(ProfilesPage.SET_STATUS_TO_LOCKED);
+		Thread.sleep(2000);
+	}
+
+	public void setStatusToSuspended() throws Exception {
+		System.out.println("Set users status to suspended ...");
+		webDriverExtended.click(ProfilesPage.BUTTON_SET_STATUS_TO);
+		webDriverExtended.click(ProfilesPage.SET_STATUS_TO_SUSPENDED);
+		Thread.sleep(2000);
+	}
+
+	public void setStatusToDeleted() throws Exception {
+		System.out.println("Set users status to deleted ...");
+		webDriverExtended.click(ProfilesPage.BUTTON_SET_STATUS_TO);
+		webDriverExtended.click(ProfilesPage.SET_STATUS_TO_DELETED);
+		Thread.sleep(2000);
+	}
+
+	public void typeAddress(String value) throws Exception {
+		System.out.println("Typing adress ...");
+		webDriverExtended.type(ProfilesPage.TYPE_ADDRESS, value);
+	}
+
+	public void typeCity(String value) throws Exception {
+		System.out.println("Typing city name ...");
+		webDriverExtended.type(ProfilesPage.TYPE_CITY, value);
+	}
+
+	public void typeState(String value) throws Exception {
+		System.out.println("Typing state name ...");
+		webDriverExtended.type(ProfilesPage.TYPE_STATE, value);
+	}
+
+	public void typeCountry(String value) throws Exception {
+		System.out.println("Typing country name ...");
+		webDriverExtended.type(ProfilesPage.TYPE_COUNTRY, value);
+	}
+
+	public void typeZIP(String value) throws Exception {
+		System.out.println("Typing ZIP code ...");
+		webDriverExtended.type(ProfilesPage.TYPE_ZIP, value);
+	}
+
+	public void approveRequest() throws Exception {
+		pressRegistrationRequest();
+		Thread.sleep(4000);
+		checkRequestUser();
+		Thread.sleep(4000);
+		webDriverExtended.scrollUnderElement(ProfilesPage.ACTION);
+		pressActionButton();
+		setToApprove();
+		Thread.sleep(5000);
+
+	}
+
+	public void declineRequest() throws Exception {
+		pressRegistrationRequest();
+		Thread.sleep(4000);
+		checkRequestUser();
+		Thread.sleep(4000);
+		webDriverExtended.scrollUnderElement(ProfilesPage.ACTION);
+		pressActionButton();
+		setToDecline();
+		Thread.sleep(5000);
+
+	}
+
+	public void createNewUser() throws Exception {
+
+		System.out.println("Creating New User...");
+		pressNewUserPanel();
+		Thread.sleep(2000);
+		typeUsername("JenkinsMadeUser" + UtilRandomizer.randInt(1, 10000));
+		typeEmail();
+		typeFirstName();
+		typeLastName();
+		selectStatusFromMenu(UtilRandomizer.randInt(0, 2));
+		selectRoleFromMenu(UtilRandomizer.randInt(1, 3));
+		Thread.sleep(10000);
+		webDriverExtended.scrollUnderElement(ProfilesPage.SELECT_PASSWORD_TYPE);
+		selectGeneratedPasswordType();
+		Thread.sleep(2000);
+		typePassExp(UtilRandomizer.randDateControlYear(2015, 2030) + " 00:00:00");
+		Thread.sleep(2000);
+		webDriverExtended.scrollUnderElement(ProfilesPage.TYPE_ADDRESS);
+		Thread.sleep(2000);
+		typeBirth(UtilRandomizer.randDateTotal());
+		Thread.sleep(2000);
+		selectGender(UtilRandomizer.randInt(1, 2));
+		Thread.sleep(2000);
+		typeDayPhone("+123-123-1234");
+		webDriverExtended.scrollUnderElement(ProfilesPage.CREATE_USER_BUTTON);
+		typeAddress("Obilicev Venac br.1 ");
+		Thread.sleep(2000);
+		typeCity("Beograd");
+		typeState("--------");
+		typeCountry("Srbija");
+		typeZIP("11000");
+		webDriverExtended.scrollUnderElement(ProfilesPage.CREATE_USER_BUTTON);
+		PressCreateUser();
+		Thread.sleep(7000);
+	}
+
+	public void changeStatusUser() throws Exception {
+		checkUser();
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_SET_STATUS_TO);
+		Thread.sleep(1000);
+		setStatusToActive();
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_NEW_USER_PANEL);
+		Thread.sleep(1000);
+		checkUser();
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_SET_STATUS_TO);
+		Thread.sleep(1000);
+		setStatusToLocked();
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_NEW_USER_PANEL);
+		Thread.sleep(1000);
+		checkUser();
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_SET_STATUS_TO);
+		Thread.sleep(1000);
+		setStatusToSuspended();
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_NEW_USER_PANEL);
+		Thread.sleep(1000);
+		checkUser();
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_SET_STATUS_TO);
+		Thread.sleep(1000);
+		setStatusToDeleted();
+	}
+
+	public void manageUsers() throws Exception {
+
+		createNewUser();
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_USERS_CREATED_BY_ME);
+		showListOfAllUsers();
+		Thread.sleep(1000);
+		selectStatusByPending();
+		changeStatusUser();
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_USERS_CREATED_BY_ME);
+		pressButtonUserCreatedByMe();
+		Thread.sleep(3000);
+		checkUser();
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_SET_STATUS_TO);
+		setStatusToDeleted();
+		Thread.sleep(2000);
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_REGISTRATION_REQUEST);
+		Thread.sleep(2000);
+		approveRequest();
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_NEW_USER_PANEL);
+		checkRequestUser();
+		webDriverExtended.scrollUnderElement(ProfilesPage.ACTION);
+		pressActionButton();
+		Thread.sleep(2000);
+		setToDecline();
+		Thread.sleep(6000);
+	}
+
+	// GROUP
+	public void pressCreateNewGroup() throws Exception {
+		System.out.println("Press Create Button...");
+		webDriverExtended.click(ProfilesPage.BUTTON_CREATE);
+	}
+
+	public void pressCreateNewSubgroup() throws Exception {
+		System.out.println("Press Button New Subgroup ...");
+		webDriverExtended.click(ProfilesPage.BUTTON_NEW_SUBCOURSE);
+	}
+
+	public void pressCreateNewCourseName() throws Exception {
+		System.out.println("Press New Groupe Name...");
+		webDriverExtended.click(ProfilesPage.INPUT_NEW_COURSE_NAME);
+	}
+
+	public void typeNewCourseName(String value) throws Exception {
+		System.out.println("Typing New Groupe Name...");
+		webDriverExtended.type(ProfilesPage.INPUT_NEW_COURSE_NAME, value);
+
+	}
+
+	public void pressMembers() throws Exception {
+		System.out.println("Press Button Members ...");
+		webDriverExtended.click(ProfilesPage.BUTTON_MEMBERS);
+	}
+	public void pressManagers() throws Exception {
+		System.out.println("Press Button Managers ...");
+		webDriverExtended.click(ProfilesPage.BUTTON_MANAGERS);
+	}
+	public void pressAssignMembers() throws Exception {
+		System.out.println("Press Assign Members ...");
+		webDriverExtended.click(ProfilesPage.ASSIGN_MEMBERS );
+	}
+	public void pressAssignManagers() throws Exception {
+		System.out.println("Press Assign Managers ...");
+		webDriverExtended.click(ProfilesPage.ASSIGN_MANAGERS );
+	}
+
+	public void typeNewCourseDescription(String value) throws Exception {
+		System.out.println("Typing New Group Description ...");
+		webDriverExtended.type(ProfilesPage.INPUT_NEW_COURSE_DESCRIPTION, value);
+	}
+
+	public void pressSaveNewGroup() throws Exception {
+		System.out.println("Press Save Button...");
+		webDriverExtended.click(ProfilesPage.BUTTON_SAVE);
+	}
+
+	public void pressTypeOfMembers() throws Exception {
+		System.out.println("Press type of Members...");
+		webDriverExtended.click(ProfilesPage.TYPE_OF_MEMBERS);
+	}
+
+	public void pressAllUser() throws Exception {
+		System.out.println("Select all type of Members...");
+		webDriverExtended.click(By.xpath("//*[@id=\'membersForm:membersMode_1\']"));
+	}
+
+	public void pressConfirmAssignMembers() throws Exception {
+		System.out.println("Press Confirm Button...");
+		webDriverExtended.click(ProfilesPage.CONFIRM_ASSIGN_MEMBERS);
+	}
+	public void pressConfirmAssignMembers2() throws Exception {
+		System.out.println("Press Confirm Button...");
+		webDriverExtended.click(ProfilesPage.CONFIRM_ASSIGN_MEMBERS2);
+	}
+	public void checkFirstUser() throws Exception {
+		System.out.println("Check first user from list...");
+		webDriverExtended.click(By.xpath("//*[@id='assignUsersForm:allUsersTable_data']/tr[1]/td[1]/div/div[2]"));
+	}
+	public void checkSomeUser() throws Exception {
+		System.out.println("Check first user from list...");
+		webDriverExtended.click(By.xpath("//*[@id=\'membersForm:candidatesId_data\']/tr[1]/td[2]"));
+	}
+	public void checkSecondeUser() throws Exception {
+		System.out.println("Check seconde user from list...");
+		webDriverExtended.click(By.xpath("//*[@id=\'assignUsersForm:allUsersTable_data\']/tr[2]/td[2]"));
+	}
+	
+	public void checkSubgroupFirstUser() throws Exception {
+		System.out.println("Check first user from list...");
+		webDriverExtended.click(By.xpath("//*[@id=\'assignUsersForm:assignCandidates_data\']/tr[1]/td[2]"));
+	}
+
+	public void pressExportMembersOfGroupAsExcel() throws Exception {
+		System.out.println("Press Export Members Of Group As Excel...");
+		webDriverExtended.click(ProfilesPage.BUTTON_EXPORT_MEMBERS_OF_GROUP_AS_EXCEL);
+	}
+	public void checkFirstUser2() throws Exception {
+		System.out.println("Check first user from list...");
+		webDriverExtended.click(ProfilesPage.CHECK_FIRST_ONE2);
+	}
+	public void checkFirstUser3() throws Exception {
+		System.out.println("Check first user from list...");
+		webDriverExtended.click(ProfilesPage.CHECK_FIRST_ONE3);
+	}
+	public void pressButtonRemoveSelected2() throws Exception {
+		System.out.println("Press Button Remove Selected...");
+		webDriverExtended.click(ProfilesPage.BUTTON_REMOVE_SELECTED2);
+	}
+	public void pressButtonRemoveSelected3() throws Exception {
+		System.out.println("Press Button Remove Selected...");
+		webDriverExtended.click(ProfilesPage.BUTTON_REMOVE_SELECTED3);
+	}
+	public void checkFirstOne() throws Exception {
+		System.out.println("Check first user from list...");
+		webDriverExtended.click(ProfilesPage.CHECK_FIRST_ONE);
+	}
+	public void checkFirstManager() throws Exception {
+		System.out.println("Check first user/manager from list...");
+		webDriverExtended.click(ProfilesPage.CHECK_FIRST_MANAGER);
+	}
+	public void checkFirstOneManager() throws Exception {
+		System.out.println("Check first manager from list...");
+		webDriverExtended.click(ProfilesPage.CHECK_FIRST_ONE_MANAGER);
+	}
+
+	public void pressAssignAs() throws Exception {
+		System.out.println("Press Assign as Button...");
+		webDriverExtended.click(ProfilesPage.ASSIGN_AS_BUTTON);
+	}
+
+	public void selectAssignAsUser() throws Exception {
+		System.out.println("Select Assign as User option ...");
+		webDriverExtended.click(ProfilesPage.ASSIGN_AS_USER);
+	}
+
+	public void selectAssignAsManager() throws Exception {
+		System.out.println("Select Assign as Manager option ...");
+		webDriverExtended.click(ProfilesPage.ASSIGN_AS_MANAGER);
+	}
+
+	public void pressButtonOptions() throws Exception {
+		System.out.println("Press Options Button ( ...");
+		webDriverExtended.click(ProfilesPage.BUTTON_OPTIONS);
+	}
+
+	public void pressButtonDeactivate() throws Exception {
+		System.out.println("Press Deaktivate Group Button...");
+		webDriverExtended.click(ProfilesPage.BUTTON_DEACTIVATE_COURSE);
+	}
+
+	public void pressButtonActivate() throws Exception {
+		System.out.println("Press Aktivate Group Button...");
+		webDriverExtended.click(ProfilesPage.BUTTON_ACTIVATE_COURSE);
+	}
+	public void pressButtonConfirmSubgroupMembers() throws Exception {
+		System.out.println("Press Button Confirm Subgroup Member...");
+		webDriverExtended.click(ProfilesPage.CONFIRM_SUBGROUP_MEMBERS);
+	}
+
+	public void pressButtonDelete() throws Exception {
+		System.out.println("Press Delete Group Button...");
+		webDriverExtended.click(ProfilesPage.BUTTON_DELETE_COURSE);
+	}
+
+	public void pressButtonExportAsExcel() throws Exception {
+		System.out.println("Press Export as Excel ...");
+		webDriverExtended.click(ProfilesPage.BUTTON_EXPORT_AS_EXCEL);
+	}
+
+	public void pressButtonEditUserGroup() throws Exception {
+		System.out.println("Press button edit user group ...");
+		webDriverExtended.click(ProfilesPage.BUTTON_EDIT_USER_GROUP);
+	}
+
+	public void pressButtonConfirm() throws Exception {
+		System.out.println("Press Confirm Button...");
+		webDriverExtended.click(ProfilesPage.BUTTON_CONFIRM);
+		System.out.println("Deleted ...");
+	}
+
+	public void checkOption() throws Exception {
+		System.out.println("Select type of Members of Subgroup ...");
+		webDriverExtended.click(By.id("membersForm:membersMode_1"));
+	}
+
+	public void pressButtonRemoveSelected() throws Exception {
+		System.out.println("Press Remove Selected Members...");
+		webDriverExtended.click(ProfilesPage.REMOVE_SELECTED);
+	}
+
+	public void selectUserInactiveStatus() throws Exception {
+		System.out.println("Select Inactive Status Option ...");
+		webDriverExtended.click(ProfilesPage.SELECT_USER_INACTIVE_STATUS);
+	}
+
+	public void createNewGroup() throws Exception {
+		pressCreateNewGroup();
+		typeNewCourseName(webDriverExtended.generateHash());
+		typeNewCourseDescription(webDriverExtended.generateHash());
+		pressSaveNewGroup();
+	}
+
+	public void groupFunctionalities() throws Exception {
+		createNewGroup();
+		Thread.sleep(2000);
+		pressMembers();
+		Thread.sleep(2000);
+		pressAssignMembers();
+		Thread.sleep(2000);
+		checkFirstUser();
+		Thread.sleep(2000);
+		checkSecondeUser();
+		Thread.sleep(2000);
+		webDriverExtended.scrollUnderElement(ProfilesPage.CONFIRM_ASSIGN_MEMBERS);
+		pressConfirmAssignMembers();
+		Thread.sleep(2000);
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_MANAGERS);
+		pressManagers();
+		pressAssignManagers();
+		Thread.sleep(1000);
+		checkFirstOne();
+		checkSecondeUser();
+		webDriverExtended.scrollUnderElement(ProfilesPage.CONFIRM_ASSIGN_MEMBERS);
+		Thread.sleep(3000);
+		pressConfirmAssignMembers();
+		Thread.sleep(6000);
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_NEW_SUBCOURSE);
+		Thread.sleep(2000);
+		pressCreateNewSubgroup();
+		Thread.sleep(4000);
+		typeNewCourseName(webDriverExtended.generateHash());
+		typeNewCourseDescription(webDriverExtended.generateHash());
+		selectUserInactiveStatus() ;
+		pressSaveNewGroup();
+		Thread.sleep(7000);
+		pressMembers();
+		Thread.sleep(2000);
+		pressAssignMembers();
+		Thread.sleep(2000);
+		checkSubgroupFirstUser();
+		webDriverExtended.scrollUnderElement(ProfilesPage.CONFIRM_SUBGROUP_MEMBERS);
+		pressButtonConfirmSubgroupMembers();
+		Thread.sleep(2000);
+		webDriverExtended.scrollUnderElement(By
+				.xpath("//*[@id=\'membersForm:candidatesId_data\']/tr/td[2]"));
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_MANAGERS);
+		pressManagers();
+		pressAssignManagers();
+		Thread.sleep(1000);
+		checkFirstManager();
+		webDriverExtended.scrollUnderElement(ProfilesPage.CONFIRM_ASSIGN_MEMBERS2);
+		Thread.sleep(3000);
+		pressConfirmAssignMembers2();
+		Thread.sleep(6000);
+		checkFirstOneManager();
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_REMOVE_SELECTED3);
+		pressButtonRemoveSelected3();
+		pressButtonConfirm();
+		Thread.sleep(7000);
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_EXPORT_MANAGERS_OF_SUBGROUP_AS_EXCEL);
+		pressButtonExportAsExcel();
+		Thread.sleep(10000);
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_NEW_SUBCOURSE);
+		pressButtonOptions();
+		Thread.sleep(2000);
+		pressButtonActivate();
+		pressButtonConfirm();
+		Thread.sleep(9000);
+		pressButtonOptions();
+		pressButtonDelete();
+		pressButtonConfirm();
+		Thread.sleep(4000);
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_NEW_SUBCOURSE);
+		System.out.println("Making new subgroup with active status ...");
+		Thread.sleep(2000);
+		pressCreateNewSubgroup();
+		Thread.sleep(9000);
+		typeNewCourseName(webDriverExtended.generateHash());
+		Thread.sleep(2000);
+		typeNewCourseDescription(webDriverExtended.generateHash());
+		Thread.sleep(2000);
+		pressSaveNewGroup();
+		Thread.sleep(7000);
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_OPTIONS);
+		pressButtonOptions();
+		Thread.sleep(1000);
+		pressButtonDeactivate();
+		Thread.sleep(1000);
+		pressButtonConfirm();
+		Thread.sleep(9000);
+		pressButtonOptions();
+		pressButtonDelete();
+		pressButtonConfirm();
+		Thread.sleep(6000);
+		System.out.println("Deleting users from list ...");
+		pressMembers();
+		Thread.sleep(2000);
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_NEW_SUBCOURSE);
+		Thread.sleep(2000);
+		checkSomeUser();
+		Thread.sleep(1000);
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_REMOVE_SELECTED2);
+		pressButtonRemoveSelected2();
+		Thread.sleep(3000);
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_OPTIONS);
+		Thread.sleep(2000);
+		//pressButtonOptions();
+		webDriverExtended.click(By.id("//*[@id='titleForm:courseclassOptionBtn_button']/span[2]"));
+		pressButtonDeactivate();
+		pressButtonConfirm();
+		Thread.sleep(9000);
+		pressButtonOptions();
+		pressButtonDelete();
+		pressButtonConfirm();
+
+	}
+	
+	public void groupFunctionalitiesOld() throws Exception {
+		createNewGroup();
+		System.out.println("Press Button Members (adding as user )...");
+		Thread.sleep(2000);
+		checkFirstUser();
+		webDriverExtended.scrollUnderElement(ProfilesPage.CONFIRM_ASSIGN_MEMBERS);
+		pressConfirmAssignMembers();
+		pressTypeOfMembers();
+		Thread.sleep(2000);
+		pressAllUser();
+		Thread.sleep(1000);
+		webDriverExtended
+				.scrollUnderElement(By.xpath("//*[@id=\'membersForm:membersource_data\']/tr[1]/td[1]/div/div[2]"));
+		checkFirstUser();
+		Thread.sleep(1000);
+		webDriverExtended.scrollUnderElement(ProfilesPage.ASSIGN_AS_BUTTON);
+		pressAssignAs();
+		Thread.sleep(2000);
+		selectAssignAsUser();
+		Thread.sleep(10000);
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_NEW_SUBCOURSE);
+		Thread.sleep(2000);
+		pressCreateNewSubgroup();
+		Thread.sleep(4000);
+		typeNewCourseName(webDriverExtended.generateHash());
+		typeNewCourseDescription(webDriverExtended.generateHash());
+		pressSaveNewGroup();
+		Thread.sleep(7000);
+		System.out.println("Press Button Members of Subgroup (adding as manager) ...");
+		pressMembers();
+		Thread.sleep(2000);
+		pressTypeOfMembers();
+		Thread.sleep(2000);
+		checkOption();
+		Thread.sleep(1000);
+		webDriverExtended
+				.scrollUnderElement(By.xpath("//*[@id=\'membersForm:membersource_data\']/tr[1]/td[1]/div/div[2]"));
+		checkFirstUser();
+		Thread.sleep(2000);
+		webDriverExtended.scrollUnderElement(ProfilesPage.ASSIGN_AS_BUTTON);
+		pressAssignAs();
+		Thread.sleep(2000);
+		System.out.println("Select Assign as Manager option ...");
+		selectAssignAsManager();
+		Thread.sleep(10000);
+		pressButtonExportAsExcel();
+		Thread.sleep(10000);
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_NEW_SUBCOURSE);
+		pressButtonOptions();
+		Thread.sleep(2000);
+		pressButtonDeactivate();
+		pressButtonConfirm();
+		Thread.sleep(9000);
+		pressButtonOptions();
+		pressButtonDelete();
+		pressButtonConfirm();
+		Thread.sleep(4000);
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_NEW_SUBCOURSE);
+		System.out.println("Making new subgroup with inactive status ...");
+		Thread.sleep(2000);
+		pressCreateNewSubgroup();
+		Thread.sleep(9000);
+		typeNewCourseName(webDriverExtended.generateHash());
+		Thread.sleep(2000);
+		typeNewCourseDescription(webDriverExtended.generateHash());
+		Thread.sleep(2000);
+		selectUserInactiveStatus();
+		pressSaveNewGroup();
+		Thread.sleep(7000);
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_OPTIONS);
+		pressButtonOptions();
+		Thread.sleep(1000);
+		pressButtonActivate();
+		Thread.sleep(1000);
+		pressButtonConfirm();
+		Thread.sleep(9000);
+		pressButtonOptions();
+		pressButtonDelete();
+		pressButtonConfirm();
+		Thread.sleep(6000);
+		System.out.println("Deleting users from list ...");
+		pressMembers();
+		Thread.sleep(2000);
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_NEW_SUBCOURSE);
+		Thread.sleep(2000);
+		checkFirstUser();
+		Thread.sleep(1000);
+		webDriverExtended.scrollUnderElement(ProfilesPage.REMOVE_SELECTED);
+		pressButtonRemoveSelected();
+		pressButtonConfirm();
+		Thread.sleep(7000);
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_OPTIONS);
+		pressButtonOptions();
+		pressButtonDeactivate();
+		pressButtonConfirm();
+		Thread.sleep(9000);
+		pressButtonOptions();
+		pressButtonDelete();
+		pressButtonConfirm();
+
+	}
+
+	// CERTIFICATES
+
+	public void pressNewCertificate() throws Exception {
+		webDriverExtended.click(By.id("treeForm:creatCertBtn"));
+
+	}
+
+	public void pressNewCertificateTitle() throws Exception {
+		webDriverExtended.click(By.id("certForm:certificateTitleTxt"));
+
+	}
+
+	public void typeNewCertificateName(String value) throws Exception {
+		webDriverExtended.type(ProfilesPage.INPUT_NEW_CERTIFICATE_NAME, value);
+
+	}
+
+	public void typeNewCertificateSubtitle(String value) throws Exception {
+		webDriverExtended.type(ProfilesPage.INPUT_NEW_CERTIFICATE_SUBTITLETXT, value);
+
+	}
+
+	public void typeNewCertificateCompanyName(String value) throws Exception {
+		webDriverExtended.type(ProfilesPage.INPUT_NEW_CERTIFICATE_COMPANY_NAMETXT, value);
+
+	}
+
+	public void pressSaveButtonCertificate() throws Exception {
+		webDriverExtended.click(ProfilesPage.SAVE_BUTTON_FOR_CERTIFICATE);
+	}
+
+	public void createNewCertificate() throws Exception {
+		System.out.println("Press Button For New Certificate...");
+		pressNewCertificate();
+		Thread.sleep(1000);
+		System.out.println("Press For Title...");
+		pressNewCertificateTitle();
+		System.out.println("Typing New Certificate Name...");
+		typeNewCertificateName(webDriverExtended.generateHash());
+		System.out.println("Typing Certificate Subtitle...");
+		typeNewCertificateSubtitle(webDriverExtended.generateHash());
+		System.out.println("Typing Certificate Company Name...");
+		typeNewCertificateCompanyName(webDriverExtended.generateHash());
+		System.out.println("Scrolling...");
+		webDriverExtended.scrollUnderElement(ProfilesPage.SAVE_BUTTON_FOR_CERTIFICATE);
+		Thread.sleep(1000);
+		System.out.println("Press Save Button...");
+		pressSaveButtonCertificate();
+		Thread.sleep(2000);
+	}
+
+	public void createNewSubscriber() throws Exception {
+		webDriverExtended.click(By.xpath("//ul[@id='mainMenu']/li/ul/li[4]/a/span"));
+		Thread.sleep(2000);
+		// webDriverExtended.click(ProfilesPage.NEW_SUBSCRIPTION_BUTTON);
+		Thread.sleep(2000);
+		webDriverExtended.type3(ProfilesPage.INPUT_NEW_SUBSCRIBER_NAME, webDriverExtended.generateHash());
+		Thread.sleep(1000);
+		webDriverExtended.type3(ProfilesPage.INPUT_NEW_SUBSCRIBER_DESCRIPTION, webDriverExtended.generateHash());
+		Thread.sleep(1000);
+		webDriverExtended.type3(ProfilesPage.INPUT_NEW_SUBSCRIBER_MAIL_LIST, webDriverExtended.generateHash());
+		Thread.sleep(1000);
+		webDriverExtended.click(ProfilesPage.BUTTON_SAVE_NEW_SUBSCRIBER);
+		Thread.sleep(3000);
+	}
+
+	public void pressButtonInformation() throws Exception {
+		System.out.println("Press Information Button...");
+		webDriverExtended.click(ProfilesPage.BUTTON_INFORMATION);
+	}
+
+	public void pressButtonAssignments() throws Exception {
+		System.out.println("Press Assignments Button...");
+		webDriverExtended.click(ProfilesPage.BUTTON_ASSIGNMENTS);
+	}
+
+	public void pressButtonMyGroups() throws Exception {
+		System.out.println("Press My Groups Button...");
+		webDriverExtended.click(ProfilesPage.BUTTON_MY_GROUPS);
+	}
+
+	public void pressButtonMyPools() throws Exception {
+		System.out.println("Press My Pools Button...");
+		webDriverExtended.click(ProfilesPage.BUTTON_MY_POOLS);
+	}
+
+	public void pressButtonSubscribers() throws Exception {
+		System.out.println("Press Subscribers Button...");
+		webDriverExtended.click(ProfilesPage.BUTTON_SUBSCRIBERS);
+	}
+
+	public void pressButtonTheme() throws Exception {
+		System.out.println("Press Theme Button...");
+		webDriverExtended.click(ProfilesPage.BUTTON_THEME);
+	}
+
+	public void pressRemovePicture() throws Exception {
+		System.out.println("Press Remove Picture Button...");
+		webDriverExtended.click(ProfilesPage.BUTTON_REMOVE_PICTURE);
+	}
+
+	public void pressNewAttachment() throws Exception {
+		System.out.println("Press New Attachment Button...");
+		webDriverExtended.click(ProfilesPage.BUTTON_NEW_ATTACHMENT);
+	}
+
+	public void typeNewAttachmentName(String value) throws Exception {
+		System.out.println("Type New Attachment Name...");
+		webDriverExtended.type(ProfilesPage.NEW_ATTACHMENT_NAME, value);
+	}
+
+	public void typeNewAttachmentDescription(String value) throws Exception {
+		System.out.println("Type New Attachment Description...");
+		webDriverExtended.type(ProfilesPage.NEW_ATTACHMENT_DESCRIPTION, value);
+	}
+
+	public void selectNewAttachmentType() throws Exception {
+		System.out.println("Select New Attachment Type...");
+		webDriverExtended.click(ProfilesPage.SELECT_NEW_ATTACHMENT_TYPE);
+	}
+
+	public void selectNewAttachmentTypeMp4() throws Exception {
+		System.out.println("Select New Attachment Type Mp4...");
+		webDriverExtended.click(ProfilesPage.SELECT_NEW_ATTACHMENT_TYPE_MP4);
+	}
+
+	public void selectNewAttachmentTypeMp3() throws Exception {
+		System.out.println("Select New Attachment Type Mp3...");
+		webDriverExtended.click(ProfilesPage.SELECT_NEW_ATTACHMENT_TYPE_MP3);
+	}
+
+	public void selectNewAttachmentTypePdf() throws Exception {
+		System.out.println("Select New Attachment Type PDF...");
+		webDriverExtended.click(ProfilesPage.SELECT_NEW_ATTACHMENT_TYPE_PDF);
+	}
+
+	public void selectNewAttachmentTypeGoogleDoc() throws Exception {
+		System.out.println("Select New Attachment Type GoogleDoc...");
+		webDriverExtended.click(ProfilesPage.SELECT_NEW_ATTACHMENT_TYPE_GOOGLE_DOC);
+	}
+
+	public void selectNewAttachmentTypeZip() throws Exception {
+		System.out.println("Select New Attachment Type ZIP...");
+		webDriverExtended.click(ProfilesPage.SELECT_NEW_ATTACHMENT_TYPE_ZIP);
+	}
+
+	public void selectNewAttachmentTypeYTvideo() throws Exception {
+		System.out.println("Select New Attachment Type YouTube Video...");
+		webDriverExtended.click(ProfilesPage.SELECT_NEW_ATTACHMENT_TYPE_YT_VIDEO);
+	}
+
+	public void typeWebLink(String value) throws Exception {
+		System.out.println("Type Web Link...");
+		webDriverExtended.type(ProfilesPage.WEB_LINK, value);
+	}
+
+	public void selectNewAttachmentTypeLink() throws Exception {
+		System.out.println("Select New Attachment Type Link...");
+		webDriverExtended.click(ProfilesPage.SELECT_NEW_ATTACHMENT_TYPE_LINK);
+	}
+
+	public void selectNewAttachmentTypePicture() throws Exception {
+		System.out.println("Select New Attachment Type Picture...");
+		webDriverExtended.click(ProfilesPage.SELECT_NEW_ATTACHMENT_TYPE_PICTURE);
+	}
+
+	public void pressNewAttachmentCancelButton() throws Exception {
+		System.out.println("Press New Attachment Cancel Button ...");
+		webDriverExtended.click(ProfilesPage.NEW_ATTACHMENT_CANCEL_BUTTON);
+	}
+
+	public void pressSaveNewAttachment() throws Exception {
+		System.out.println("Press Save New Attachment Button...");
+		webDriverExtended.click(ProfilesPage.NEW_ATTACHMENT_SAVE_BUTTON);
+	}
+
+	public void pressPreviewAttachment() throws Exception {
+		System.out.println("Press Preview Attachment Button...");
+		webDriverExtended.click(ProfilesPage.ATTACHMENT_PREVIEW_BUTTON);
+	}
+
+	public void pressDeleteAttachment() throws Exception {
+		System.out.println("Press Delete Attachment Button...");
+		webDriverExtended.click(ProfilesPage.ATTACHMENT_DELETE_BUTTON);
+	}
+
+	public void typeUserName(String value) throws Exception {
+		System.out.println("Typing user name ...");
+		webDriverExtended.type(ProfilesPage.TYPE_USERNAME, value);
+	}
+
+	public void typeEmail2() throws Exception {
+		System.out.println("Typing user email ...");
+		webDriverExtended.type(ProfilesPage.TYPE_EMAIL, webDriverExtended.generateHash() + "@youtestme.com");
+	}
+
+	public void typeFirstName2() throws Exception {
+		System.out.println("Typing user first name ...");
+		webDriverExtended.type(ProfilesPage.TYPE_FIRST_NAME, webDriverExtended.generateHash() + "AutoQA Bot");
+	}
+
+	public void typeLastName2() throws Exception {
+		System.out.println("Typing user last name ...");
+		webDriverExtended.type(ProfilesPage.TYPE_LAST_NAME, webDriverExtended.generateHash() + "AutoQA Bot");
+	}
+
+	public void typeBirth2(String value) throws Exception {
+		System.out.println("Typing user birth date ...");
+		webDriverExtended.type(ProfilesPage.TYPE_DATE_OF_BIRTH, value);
+		// webDriverExtended.click(By.id("newForm:birth_input"));
+		// webDriverExtended.click(By.xpath("//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[7]/a"));
+		webDriverExtended.click(By.xpath("//*[@id=\'newForm:newProfGrid\']/tbody/tr[1]/td[1]"));
+	}
+
+	public void selectGender2(int optionNum) throws Exception {
+		System.out.println("Selecting gender...");
+		webDriverExtended.click(By.id("form:gen2_display"));
+		Thread.sleep(2000);
+		webDriverExtended.click(By.xpath(("//*[@id='newForm:gen_" + optionNum + "']")));
+
+	}
+
+	public void selectRoleFromMenu2(int optionNum) throws Exception {
+		System.out.println("Selecting role from menu ...");
+		webDriverExtended.click(By.id("form:roles2_display"));
+		Thread.sleep(2000);
+		webDriverExtended.click(By.id("form:roles_1"));
+	}
+
+	public void typeDayPhone2(String value) throws Exception {
+		System.out.println("Typing user phone number ");
+		webDriverExtended.type(ProfilesPage.TYPE_PHONE_NUMBER, value);
+	}
+
+	public void typeAddress2(String value) throws Exception {
+		System.out.println("Typing adress ...");
+		webDriverExtended.type(ProfilesPage.TYPE_ADDRESS2, value);
+	}
+
+	public void typeCity2(String value) throws Exception {
+		System.out.println("Typing city name ...");
+		webDriverExtended.type(ProfilesPage.TYPE_CITY2, value);
+	}
+
+	public void typeState2(String value) throws Exception {
+		System.out.println("Typing state name ...");
+		webDriverExtended.type(ProfilesPage.TYPE_STATE2, value);
+	}
+
+	public void typeCountry2(String value) throws Exception {
+		System.out.println("Typing country name ...");
+		webDriverExtended.type(ProfilesPage.TYPE_COUNTRY2, value);
+	}
+
+	public void typeZIP2(String value) throws Exception {
+		System.out.println("Typing ZIP code ...");
+		webDriverExtended.type(ProfilesPage.TYPE_ZIP2, value);
+	}
+
+	public void pressCancelButton() throws Exception {
+		System.out.println("Press Cancel Button...");
+		webDriverExtended.click(ProfilesPage.BUTTON_CANCEL2);
+	}
+
+	public void checkTypeOfAssignmentsTable() throws Exception {
+		System.out.println("checking Type Of Assignments Table...");
+		webDriverExtended.click(ProfilesPage.TABLE_TYPE_OF_ASSIGNMENTS);
+		System.out.println("checking Tests Type ...");
+		webDriverExtended.click(ProfilesPage.OPTION_TESTS_TYPE);
+		webDriverExtended.click(ProfilesPage.TABLE_TYPE_OF_ASSIGNMENTS);
+		System.out.println("checking Survey Type ...");
+		webDriverExtended.click(ProfilesPage.OPTION_SURVEYS_TYPE);
+		webDriverExtended.click(ProfilesPage.TABLE_TYPE_OF_ASSIGNMENTS);
+		System.out.println("checking Training Courses Type ...");
+		webDriverExtended.click(ProfilesPage.OPTION_TRAINING_COURSES_TYPE);
+	}
+
+	public void checkTypeOfStatusTable() throws Exception {
+		System.out.println("checking Type Of Status Table...");
+		webDriverExtended.click(ProfilesPage.TABLE_TYPE_OF_STATUS);
+		System.out.println("checking Available Type ...");
+		Thread.sleep(1000);
+		webDriverExtended.click(ProfilesPage.OPTION_AVAILABLE);
+		webDriverExtended.click(ProfilesPage.TABLE_TYPE_OF_STATUS);
+		System.out.println("checking Upcoming Type ...");
+		Thread.sleep(1000);
+		webDriverExtended.click(ProfilesPage.OPTION_UPCOMING);
+		webDriverExtended.click(ProfilesPage.TABLE_TYPE_OF_STATUS);
+		System.out.println("checking Pending Type ...");
+		Thread.sleep(1000);
+		webDriverExtended.click(ProfilesPage.OPTION_PENDING);
+		webDriverExtended.click(ProfilesPage.TABLE_TYPE_OF_STATUS);
+		Thread.sleep(1000);
+		System.out.println("checking Cpmpleted Type ...");
+		webDriverExtended.click(ProfilesPage.OPTION_COMPLETED);
+		webDriverExtended.click(ProfilesPage.TABLE_TYPE_OF_STATUS);
+		Thread.sleep(2000);
+		System.out.println("checking Suspended or Expired Type ...");
+		webDriverExtended.click(ProfilesPage.OPTION_SUSPENDED);
+	}
+
+	public void checkTypeOfSortOrderTable() throws Exception {
+		System.out.println("checking Type Of Sort Order Table...");
+		webDriverExtended.click(ProfilesPage.TABLE_SORT_ORDER);
+		System.out.println("checking A-Z Type ...");
+		webDriverExtended.click(ProfilesPage.OPTION_A_Z);
+		Thread.sleep(1000);
+		webDriverExtended.click(ProfilesPage.TABLE_SORT_ORDER);
+		System.out.println("checking Z_A Type ...");
+		webDriverExtended.click(ProfilesPage.OPTION_A_Z);
+	}
+
+	public void typeSearch(String value) throws Exception {
+		System.out.println("Typing search ...");
+		webDriverExtended.type(ProfilesPage.TYPE_SEARCH, value);
+	}
+
+	public void assignGroupRoleAsUser() throws Exception {
+		System.out.println("Select Group...");
+		webDriverExtended.click(By.id("ccForm:myTable_node_0"));
+		System.out.println("Scrolling ...");
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_ASSIGN_AS);
+		Thread.sleep(1000);
+		System.out.println("Select Button Assign As...");
+		webDriverExtended.click(ProfilesPage.BUTTON_ASSIGN_AS);
+		Thread.sleep(1000);
+		System.out.println("Select Button Assign As User...");
+		webDriverExtended.click(ProfilesPage.BUTTON_ASSIGN_AS_USER);
+	}
+
+	public void assignGroupRoleAsManager() throws Exception {
+		System.out.println("Select Group...");
+		webDriverExtended.click(By.id("ccForm:myTable_node_0"));
+		System.out.println("Scrolling ...");
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_ASSIGN_AS);
+		Thread.sleep(1000);
+		System.out.println("Select Button Assign As...");
+		webDriverExtended.click(ProfilesPage.BUTTON_ASSIGN_AS);
+		Thread.sleep(2000);
+		System.out.println("Select Button Assign As Manager...");
+		webDriverExtended.click(ProfilesPage.BUTTON_ASSIGN_AS_MANAGER);
+	}
+
+	public void removeMemberFromGroup() throws Exception {
+		System.out.println("Select Group...");
+		webDriverExtended.click(By.id("ccForm:myTable_node_0"));
+		System.out.println("Scrolling ...");
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_REMOVE_MEMBER_FROM_GROUP);
+		Thread.sleep(1000);
+		System.out.println("Click Button Remove...");
+		webDriverExtended.click(ProfilesPage.BUTTON_REMOVE_MEMBER_FROM_GROUP);
+		Thread.sleep(1000);
+		pressButtonConfirm();
+		Thread.sleep(1000);
+	}
+
+	public void selectAllActiveGroups() throws Exception {
+		System.out.println("Press Table Display Option...");
+		webDriverExtended.click(ProfilesPage.TABLE_DISPLAY_GROUPS);
+		System.out.println("Select all Active System Group ...");
+		webDriverExtended.click(ProfilesPage.ALL_ACTIVE_SYSTEM_GROUP);
+	}
+
+	public void assignPoolRoleToReadOnly() throws Exception {
+		System.out.println("Select Pool...");
+		webDriverExtended.click(By.id("ccForm:myPoolTable_node_0"));
+		System.out.println("Scrolling ...");
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_SET_POOL_ROLE_TO);
+		Thread.sleep(1000);
+		System.out.println("Select Button Set Pool Role To ...");
+		webDriverExtended.click(ProfilesPage.BUTTON_SET_POOL_ROLE_TO);
+		Thread.sleep(1000);
+		System.out.println("Set Pool Role To Read Only ...");
+		webDriverExtended.click(ProfilesPage.BUTTON_SET_POOL_ROLE_TO_READ_ONLY);
+	}
+
+	public void assignPoolRoleToModify() throws Exception {
+		System.out.println("Select Pool...");
+		webDriverExtended.click(By.id("ccForm:myPoolTable_node_0"));
+		System.out.println("Scrolling ...");
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_SET_POOL_ROLE_TO);
+		Thread.sleep(1000);
+		System.out.println("Select Button Set Pool Role To ...");
+		webDriverExtended.click(ProfilesPage.BUTTON_SET_POOL_ROLE_TO);
+		Thread.sleep(2000);
+		System.out.println("Set Pool Role To Modify ...");
+		webDriverExtended.click(ProfilesPage.BUTTON_SET_POOL_ROLE_TO_MODIFY);
+	}
+
+	public void removePoolRole() throws Exception {
+		System.out.println("Select Pool...");
+		webDriverExtended.click(By.xpath("//*[@id=\'ccForm:myPoolTable_node_0\']/td[1]"));
+		System.out.println("Scrolling ...");
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_REMOVE_POOL_ROLE);
+		Thread.sleep(1000);
+		System.out.println("Click Button Remove Pool Role ...");
+		webDriverExtended.click(ProfilesPage.BUTTON_REMOVE_POOL_ROLE);
+	}
+
+	public void selectAllSystemPools() throws Exception {
+		System.out.println("Press Table Display Option...");
+		webDriverExtended.click(ProfilesPage.TABLE_DISPLAY_POOLS);
+		System.out.println("Select all System Pools ...");
+		webDriverExtended.click(ProfilesPage.ALL_SYSTEM_POOLS);
+	}
+
+	public void typeListName() throws Exception {
+		System.out.println("Typing List name ...");
+		webDriverExtended.type(ProfilesPage.SET_LIST_NAME, webDriverExtended.generateHash());
+	}
+
+	public void typeDescription() throws Exception {
+		System.out.println("Typing Description ...");
+		webDriverExtended.type(ProfilesPage.SET_DESCRIPTION, webDriverExtended.generateHash());
+	}
+
+	public void typeEmail3() throws Exception {
+		System.out.println("Typing Subscriber email ...");
+		webDriverExtended.type(ProfilesPage.SET_EMAILS, webDriverExtended.generateHash() + "@youtestme.com");
+	}
+
+	public void createSubscriber() throws Exception {
+		System.out.println("Press Add Subscribers ...");
+		webDriverExtended.click(ProfilesPage.ADD_SUBSCRIBERS);
+		System.out.println("Select Create a New Subscriber ...");
+		webDriverExtended.click(ProfilesPage.CREATE_NEW_SUBSCRIBERS);
+		typeListName();
+		typeDescription();
+		typeEmail3();
+		System.out.println("Press Save Button ...");
+		webDriverExtended.click(ProfilesPage.SAVE_BUTTON);
+		Thread.sleep(3000);
+	}
+
+	public void selectUnselectThemeOption() throws Exception {
+		System.out.println("Select Full Size Panels ...");
+		webDriverExtended.click(ProfilesPage.CHECK_FULL_SIZE_PANELS);
+		System.out.println("Select Make Changes Global ...");
+		webDriverExtended.click(ProfilesPage.CHECK_MAKE_CHANGES_GLOBAL);
+		System.out.println("Select Use Custom Colors ...");
+		webDriverExtended.click(ProfilesPage.CHECK_USE_CUSTOM_COLORS);
+	}
+
+	public void manageMyProfile() throws Exception {
+	    pressRemovePicture();
+		Thread.sleep(6000);
+		webDriverExtended.isElementPresent(ProfilesPage.BUTTON_UPLOAD_PICTURE);
+		pressNewAttachment();
+		Thread.sleep(1000);
+		selectNewAttachmentType();
+		Thread.sleep(1000);
+		typeNewAttachmentName(webDriverExtended.generateHash());
+		Thread.sleep(1000);
+		typeNewAttachmentDescription(webDriverExtended.generateHash());
+		selectNewAttachmentTypeMp4();
+		Thread.sleep(1000);
+		selectNewAttachmentType();
+		Thread.sleep(1000);
+		selectNewAttachmentTypeMp3();
+		Thread.sleep(1000);
+		selectNewAttachmentType();
+		Thread.sleep(1000);
+		selectNewAttachmentTypePdf();
+		Thread.sleep(1000);
+		selectNewAttachmentType();
+		Thread.sleep(1000);
+		selectNewAttachmentTypeZip();
+		Thread.sleep(2000);
+		selectNewAttachmentType();
+		Thread.sleep(1000);
+		selectNewAttachmentTypePicture();
+		Thread.sleep(2000);
+		pressNewAttachmentCancelButton();
+		Thread.sleep(2000);
+		pressNewAttachment();
+		Thread.sleep(1000);
+		typeNewAttachmentName(webDriverExtended.generateHash());
+		Thread.sleep(1000);
+		typeNewAttachmentDescription(webDriverExtended.generateHash());
+		selectNewAttachmentType();
+		Thread.sleep(1000);
+		selectNewAttachmentTypeGoogleDoc();
+		Thread.sleep(1000);
+		typeWebLink("https://docs.google.com/spreadsheets");
+		pressSaveNewAttachment();
+		Thread.sleep(4000);
+		pressPreviewAttachment();
+		Thread.sleep(2000);
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_REMOVE_PICTURE);
+		pressDeleteAttachment();
+		Thread.sleep(3000);
+		pressNewAttachment();
+		Thread.sleep(1000);
+		typeNewAttachmentName(webDriverExtended.generateHash());
+		Thread.sleep(1000);
+		typeNewAttachmentDescription(webDriverExtended.generateHash());
+		selectNewAttachmentType();
+		Thread.sleep(1000);
+		selectNewAttachmentTypeYTvideo();
+		Thread.sleep(1000);
+		typeWebLink("https://www.youtube.com/watch?v=FFDDN1C1MEQ");
+		pressSaveNewAttachment();
+		Thread.sleep(2000);
+		pressPreviewAttachment();
+		Thread.sleep(3000);
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_REMOVE_PICTURE);
+		pressDeleteAttachment();
+		Thread.sleep(4000);
+		pressNewAttachment();
+		Thread.sleep(3000);
+		typeNewAttachmentName(webDriverExtended.generateHash());
+		Thread.sleep(1000);
+		typeNewAttachmentDescription(webDriverExtended.generateHash());
+		Thread.sleep(1000);
+		selectNewAttachmentType();
+		Thread.sleep(1000);
+		selectNewAttachmentTypeLink();
+		Thread.sleep(1000);
+		typeWebLink("https://www.youtestme.com/");
+		pressSaveNewAttachment();
+		Thread.sleep(2000);
+		pressPreviewAttachment();
+		Thread.sleep(2000);
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_REMOVE_PICTURE);
+		pressDeleteAttachment();
+		Thread.sleep(2000);
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_ASSIGNMENTS);
+		webDriverExtended.click(ProfilesPage.TYPE_USERNAME);
+		Thread.sleep(1000);
+		webDriverExtended.click(ProfilesPage.TYPE_EMAIL);
+		Thread.sleep(1000);
+		webDriverExtended.click(ProfilesPage.TYPE_FIRST_NAME);
+		Thread.sleep(1000);
+		webDriverExtended.click(ProfilesPage.TYPE_LAST_NAME);
+		Thread.sleep(1000);
+		webDriverExtended.click(ProfilesPage.TYPE_ROLES_MENU);
+		Thread.sleep(1000);
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_CANCEL2);
+		// webDriverExtended.click(ProfilesPage.INPUT_BIRTH_DATE);
+		webDriverExtended.click(ProfilesPage.TYPE_ZIP2);
+		Thread.sleep(2000);
+		webDriverExtended.click(ProfilesPage.SELECT_GENDER);
+		webDriverExtended.click(ProfilesPage.TYPE_PHONE_NUMBER);
+		Thread.sleep(1000);
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_CANCEL2);
+		Thread.sleep(1000);
+		webDriverExtended.click(ProfilesPage.TYPE_ADDRESS2);
+		Thread.sleep(1000);
+		webDriverExtended.click(ProfilesPage.TYPE_CITY2);
+		Thread.sleep(1000);
+		webDriverExtended.click(ProfilesPage.TYPE_STATE2);
+		Thread.sleep(1000);
+		webDriverExtended.click(ProfilesPage.TYPE_COUNTRY2);
+		Thread.sleep(1000);
+		pressCancelButton();
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_ASSIGNMENTS);
+		pressButtonAssignments();
+		checkTypeOfAssignmentsTable();
+		checkTypeOfStatusTable();
+		checkTypeOfSortOrderTable();
+		typeSearch(webDriverExtended.generateHash());
+		pressButtonMyGroups();
+		Thread.sleep(1000);
+		assignGroupRoleAsUser();
+		System.out.println("Scrolling ...");
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_MY_GROUPS);
+		Thread.sleep(2000);
+		// assignGroupRoleAsManager();
+		// System.out.println("Scrolling ...");
+		// webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_MY_GROUPS);
+		removeMemberFromGroup();
+		System.out.println("Scrolling ...");
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_MY_GROUPS);
+		selectAllActiveGroups();
+		System.out.println("Scrolling ...");
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_MY_POOLS);
+		selectAllActiveGroups();
+		pressButtonMyPools();
+		assignPoolRoleToReadOnly();
+		System.out.println("Scrolling ...");
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_MY_POOLS);
+		removePoolRole();
+		Thread.sleep(6000);
+		System.out.println("Scrolling ...");
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_SUBSCRIBERS);
+		pressButtonSubscribers();
+		createProfileSubscription();
+		System.out.println("Scrolling ...");
+		webDriverExtended.scrollUnderElement(ProfilesPage.BUTTON_MY_GROUPS);
+		pressButtonTheme();
+		selectUnselectThemeOption();
+		selectUnselectThemeOption();
+		Thread.sleep(1000);
+		System.out.println("Press Confirm Button ...");
+		webDriverExtended.click(ProfilesPage.CONFIRM_BUTTON3);
+		Thread.sleep(2000);
+		System.out.println("Press Cancel Button ...");
+		webDriverExtended.click(ProfilesPage.CANCEL_BUTTON);
+		Thread.sleep(4000);
+
+		/*
+		 * Thread.sleep(2000); webDriverExtended.type(ProfilesPage.TYPE_USERNAME,
+		 * "JenkinsMadeUser" + UtilRandomizer.randInt(1, 10000)); typeEmail2();
+		 * typeFirstName2(); typeLastName2();
+		 * webDriverExtended.scrollUnderElement(ProfilesPage.TYPE_DATE_OF_BIRTH);
+		 * selectRoleFromMenu(UtilRandomizer.randInt(1, 2)); Thread.sleep(2000);
+		 * typeBirth2(UtilRandomizer.randDateTotal());
+		 * selectGender2(UtilRandomizer.randInt(1, 2)); typeDayPhone2("+123-123-1234");
+		 * webDriverExtended.scrollUnderElement(ProfilesPage.TYPE_COUNTRY2);
+		 * typeAddress2("Obilicev Venac br.1 "); typeCity2("Beograd");
+		 * typeState2("--------"); typeCountry2("Srbija"); typeZIP2("11000");
+		 * pressCancelButton(); Thread.sleep(4000);
+		 */
+
+	}
+
+	public void createProfileSubscription() throws Exception {
+		System.out.println("Press Add Subscribers ...");
+		webDriverExtended.click(ProfilesPage.ADD_SUBSCRIBERS);
+		System.out.println("Select From the list of all subscribers ...");
+		webDriverExtended.click(ProfilesPage.ALL_SUBSCRIBERS);
+		System.out.println("Typing List name Search ...");
+		webDriverExtended.type(ProfilesPage.SEARCH_ASSIGN_LIST_NAME, webDriverExtended.generateHash());
+		System.out.println("Typing Description Search ...");
+		webDriverExtended.type(ProfilesPage.SEARCH_ASSIGN_DESCRIPTION, webDriverExtended.generateHash());
+		System.out.println("Typing Subscriber emails Search ...");
+		webDriverExtended.type(ProfilesPage.SEARCH_ASSIGN_EMAIL, webDriverExtended.generateHash() + "@youtestme.com");
+		System.out.println("Press Confirm ...");
+		webDriverExtended.click(ProfilesPage.CONFIRM_BUTTON2);
+		Thread.sleep(6000);
+		createSubscriber();
+		createSubscriber();
+		createSubscriber();
+		System.out.println("Scrolling ...");
+		webDriverExtended.scrollUnderElement(PRESS_SUBSCRIBER_EXPORT);
+		System.out.println("Press Export Button ...");
+		webDriverExtended.click(ProfilesPage.PRESS_SUBSCRIBER_EXPORT);
+		Thread.sleep(4000);
+		System.out.println("Press Button Edit Subscriber ...");
+		webDriverExtended.click(ProfilesPage.BUTTON_EDIT_SUBSCRIBER);
+		System.out.println("Replacing Subscriber name ...");
+		webDriverExtended.replaceText(ProfilesPage.SET_LIST_NAME, webDriverExtended.generateHash());
+		System.out.println("Replacing Subscriber Description ...");
+		webDriverExtended.replaceText(ProfilesPage.SET_DESCRIPTION, webDriverExtended.generateHash());
+		System.out.println("Replacing Subscriber email ...");
+		webDriverExtended.replaceText(ProfilesPage.SET_EMAILS, webDriverExtended.generateHash() + "@youtestme.com");
+		System.out.println("Press Update Button ...");
+		webDriverExtended.click(ProfilesPage.SAVE_BUTTON);
+		Thread.sleep(2000);
+		System.out.println("Checking one Subscriber ...");
+		webDriverExtended.click(ProfilesPage.CHECK_SOME_SUBSCRIBER);
+		System.out.println("Press Button Remove Selected ...");
+		webDriverExtended.click(ProfilesPage.BUTTON_REMOVE_SELECTED);
+		pressButtonConfirm();
+		Thread.sleep(2000);
+		System.out.println("Select All Subscriber ...");
+		webDriverExtended.click(ProfilesPage.SELECT_ALL_SUBSCRIBER);
+		System.out.println("Press Button Remove Selected ...");
+		webDriverExtended.click(ProfilesPage.BUTTON_REMOVE_SELECTED);
+		pressButtonConfirm();
+		Thread.sleep(2000);
+		System.out.println("Typing List name Search ...");
+		webDriverExtended.type(ProfilesPage.SEARCH_SUBSCRIBER_LIST_NAME, webDriverExtended.generateHash());
+		Thread.sleep(1000);
+		System.out.println("Typing Description Search ...");
+		webDriverExtended.type(ProfilesPage.SEARCH_SUBSCRIBER_DESCRIPTION, webDriverExtended.generateHash());
+		Thread.sleep(1000);
+		System.out.println("Typing Subscriber emails Search ...");
+		webDriverExtended.type(ProfilesPage.SEARCH_SUBSCRIBER_EMAIL,
+				webDriverExtended.generateHash() + "@youtestme.com");
+		Thread.sleep(2000);
+	}
+
+	// CREATE NEW SUBSCRIPTION
+
+	public void typeSearchName(String value) throws Exception {
+		webDriverExtended.type(ProfilesPage.SEARCH_NAME, value);
+	}
+
+	public void typeListName(String value) throws Exception {
+		webDriverExtended.type(ProfilesPage.LIST_NAME, value);
+	}
+
+	public void typeListDescription(String value) throws Exception {
+		webDriverExtended.type(ProfilesPage.LIST_DESCRIPTION, value);
+	}
+
+	public void typeEmails(String value) throws Exception {
+		webDriverExtended.type(ProfilesPage.EMAILS, value);
+	}
+
+	public void typeSearchEmail(String value) throws Exception {
+		webDriverExtended.type(ProfilesPage.SEARCH_EMAIL, value);
+	}
+
+	public void typeSearchDescription(String value) throws Exception {
+		webDriverExtended.type(ProfilesPage.SEARCH_DESCRIPTION, value);
+	}
+
+	public void createSubscription() throws Exception {
+		System.out.println("Searching");
+		typeSearchName("test");
+		Thread.sleep(1000);
+		System.out.println("Create new");
+		webDriverExtended.click(ProfilesPage.CREATE_NEW);
+		Thread.sleep(1000);
+		System.out.println("Typing List Name");
+		typeListName("test");
+		System.out.println("Typing Description Name");
+		typeListDescription("opis");
+		System.out.println("Typing Email");
+		typeEmails("test@blabla.com");
+		System.out.println("Save button");
+		webDriverExtended.click(ProfilesPage.SAVE);
+		Thread.sleep(3000);
+		webDriverExtended.scrollUnderElement(SEARCH_EMAIL);
+		System.out.println("Searching description");
+		typeSearchDescription("opis");
+		Thread.sleep(2000);
+		System.out.println("Searching email");
+		typeSearchEmail("test");
+		Thread.sleep(2000);
+		/*
+		 * System.out.println("Check created");
+		 * webDriverExtended.click(ProfilesPage.CHECK); Thread.sleep(3000);
+		 * System.out.println("Remove created");
+		 * webDriverExtended.click(ProfilesPage.REMOVE); Thread.sleep(3000);
+		 */
+		System.out.println("Check Export button");
+		webDriverExtended.click(ProfilesPage.EXPORT);
+		Thread.sleep(1000);
+
+		/*
+		 * System.out.println("Create new");
+		 * webDriverExtended.click(ProfilesPage.CREATE_NEW); Thread.sleep(1000);
+		 * System.out.println("Typing List Name");
+		 * typeListName(webDriverExtended.generateHash());
+		 * System.out.println("Typing Description Name");
+		 * typeListDescription(webDriverExtended.generateHash());
+		 * System.out.println("Typing Email"); typeEmails("test@bla.com");
+		 * System.out.println("Save button");
+		 * webDriverExtended.click(ProfilesPage.SAVE); Thread.sleep(5000);
+		 */
+		webDriverExtended.scrollUnderElement(NUMBER);
+		Thread.sleep(3000);
+		System.out.println("Add user");
+		webDriverExtended.click(ProfilesPage.ADD_USER);
+		Thread.sleep(2000);
+		/*
+		 * System.out.println("Add user");
+		 * webDriverExtended.click(ProfilesPage.ADD_USER_2); Thread.sleep(2000);
+		 * System.out.println("Add user");
+		 * webDriverExtended.click(ProfilesPage.ADD_USER_3); Thread.sleep(2000);
+		 */
+		System.out.println("Click on List");
+		webDriverExtended.click(ProfilesPage.LIST);
+		Thread.sleep(2000);
+		System.out.println("Click on Subscriptions List");
+		webDriverExtended.click(ProfilesPage.SUBS_LIST);
+		Thread.sleep(2000);
+		System.out.println("Click on Export 2");
+		webDriverExtended.click(ProfilesPage.EXPORT_2);
+		Thread.sleep(2000);
+		/*
+		 * System.out.println("Click on UnSubscribe");
+		 * webDriverExtended.click(ProfilesPage.UNSUBS_3); Thread.sleep(2000);
+		 * System.out.println("Click on UnSubscribe 2");
+		 * webDriverExtended.click(ProfilesPage.UNSUBS_2); Thread.sleep(2000);
+		 */
+		System.out.println("Click on UnSubscribe 3");
+		webDriverExtended.click(ProfilesPage.UNSUBS);
+		Thread.sleep(2000);
+		webDriverExtended.scrollUnderElement(SEARCH_EMAIL);
+		Thread.sleep(2000);
+		webDriverExtended.replaceText(SEARCH_EMAIL, "@");
+		Thread.sleep(5000);
+		webDriverExtended.scrollUnderElement(CHECK_ALL);
+		System.out.println("Check created");
+		webDriverExtended.click(ProfilesPage.CHECK_ALL);
+		Thread.sleep(2000);
+		System.out.println("Remove created");
+		webDriverExtended.click(ProfilesPage.REMOVE);
+		Thread.sleep(4000);
+	}
+
+	// ********** METHODS FOR SMATSA *********** \\
+
+	public static boolean openProfiles(WebDriverExtended driver) throws InterruptedException {
+
+		driver.click3(profiles_menu);
+		Thread.sleep(1000);
+
+		return true;
+	}
+
+	public static boolean createNewUser(WebDriverExtended driver)
+			throws MalformedURLException, IOException, InterruptedException {
+
+		System.out.println("Creating a user...");
+		driver.click3(create_new_user_button);
+		Thread.sleep(1000);
+
+		System.out.println("Typing username...");
+		driver.type3(new_user_username, driver.generateHash());
+
+		System.out.println("Typing email...");
+		driver.type3(new_user_email, driver.generateHash() + "@youtestme.com");
+
+		System.out.println("Typing first name...");
+		driver.type3(new_user_first_name, "AutoQA Bot");
+
+		System.out.println("Typing last name...");
+		driver.type3(new_user_last_name, "AutoQA Bot");
+		Thread.sleep(1000);
+
+		System.out.println("Scrolling...");
+		driver.scrollUnderElement(confirm_create_new_user_button);
+		Thread.sleep(1000);
+
+		System.out.println("Confirming...");
+		driver.click3(confirm_create_new_user_button);
+		Thread.sleep(1000);
+
+		System.out.println("Waiting for notification...");
+		driver.isElementPresent(notification_user_created);
+		Thread.sleep(2000);
+
+		System.out.println("User successfully created!");
+		return true;
+
+	}
+
+	public static boolean showRoles(WebDriverExtended driver) {
+
+		driver.click3(show_roles);
+
+		return true;
+	}
+
+	public static boolean addNewRole(WebDriverExtended driver) throws Exception {
+
+		driver.click3(new_roles);
+
+		driver.type3(new_roles_name_field, driver.generateHash());
+
+		driver.type3(new_roles_description_field, driver.generateHash() + driver.getActiveURL());
+
+		driver.type3(new_roles_code_field, driver.generateUppercaseString());
+
+		// driver.visibleElement(action_button);
+
+		driver.scrollUnderElementByXpath(
+				"html/body/div[4]/div/div/form[5]/div/div[2]/table/tbody/tr[4]/td/div[2]/div/span/button");
+
+		driver.click3(action_button).click3(create_new_role);
+
+		Thread.sleep(2000);
+
+		return true;
+	}
+
+	public static boolean openProfilesPage(WebDriverExtended driver) {
+
+		driver.click3(show_roles);
+
+		return true;
+	}
+
+	public static boolean openSubscribersTab(WebDriverExtended driver) throws InterruptedException {
+
+		Thread.sleep(1000);
+		driver.click3(subscribers_tab);
+
+		return true;
+	}
+
+	public static boolean createNewSubscribers(WebDriverExtended driver) throws InterruptedException {
+
+		Thread.sleep(1000);
+		driver.click3(create_new_button);
+		Thread.sleep(1000);
+
+		driver.type3(subscribers_title_field, driver.generateHash());
+		Thread.sleep(1000);
+
+		driver.type3(subscribers_list_field, "prvi@gmail.com, drugi@gmail.com, treci@gmail.com");
+		Thread.sleep(1000);
+
+		driver.click3(save_subscribers_button);
+		Thread.sleep(1000);
+
+		return true;
+	}
+
+	public static boolean doTheTest(WebDriverExtended driver) throws InterruptedException {
+
+		Thread.sleep(1000);
+
+		if (driver.isElementPresent(click_on_test_1)) {
+			driver.click3(click_on_test_1);
+			Thread.sleep(1000);
+		} else if (driver.isElementPresent(click_on_test_2)) {
+			driver.click3(click_on_test_2);
+			Thread.sleep(1000);
+		} else {
+			driver.click3(click_on_test_3);
+			Thread.sleep(1000);
+		}
+
+		driver.click3(click_on_test_TAB);
+		Thread.sleep(1000);
+
+		driver.click3(start_test_button);
+		System.out.println("clicked: on START_TEST_BUTTON, wait 10-15 seconds");
+		Thread.sleep(11000);
+
+		driver.click3(next_question_button);
+		Thread.sleep(2000);
+
+		driver.click3(finish_test_button);
+		Thread.sleep(1000);
+
+		driver.click3(confirm_finish_test);
+		Thread.sleep(2000);
+
+		return true;
+	}
+
+}

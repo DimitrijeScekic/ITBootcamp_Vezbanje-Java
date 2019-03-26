@@ -1,0 +1,69 @@
+package prevoznoSredstvo;
+
+//kreirati paket prevozno sredstvo, kreirati klasu vozilo
+//koja poseduje broj mesta za prevoz putnika INT
+//vozilo takodje poseduje gorivo DOUBLE;
+//kapacitet prevoza putnika se zadaje prilikom kreiranja vozila
+//i nemoguce ga je promeniti GET
+//automobil je vozilo koje sadrzi odredjen broj putnika,
+//registarski broj STRING, poseduje snagu DOUBLE,
+//avion je vozilo koje sadrzi putnike
+//i koje ima jedinstveni serijski broj String, marku STRING,
+//kao i klasu putnika koju
+//koje prevozi STRING
+//putnik ima ime i prezime STRING,
+//i jedinstveni id koji se automatski dodeduljuje
+//vozilo isto ima jedinstveni id koji se automatski dodeljuje
+//u vozilo je moguce postaviti i ukloniti putnika na neko od mesta
+//povratna vrednost je indikator da li je putnik uspesno uklonjen ili nije BOOLEAN
+//VOZILO(ID:<GORIVO>:BRPUTNIKA{SVIPUTNICI})
+//AUTOMOBIL(ID:REGBROJ:<GORIVO>:BRPUTNIKA{SVIPUTNICI})
+//AVION(ID:SERBROJ:<GORIVO>:BRPUTNIKA{SVIPUTNICI})
+//za putnika: [ID:IME_PREZIME]
+
+public class GlavnaPrevoznoSredstvo {
+
+	public static void main(String[] args) {
+		Vozilo v1 = new Vozilo(60, 5);
+		Automobil a1 = new Automobil(50, 4, "BG 322DS", 140);
+		Automobil a2 = new Automobil(10, 8, "BA 102DS", 170);
+		Avion av1 = new Avion(800, 16, 43008, "EMBRAER 190");
+		Avion av2 = new Avion(1200, 100, 10087, "AIRBUS NEO 350");
+
+		Putnik p1 = new Putnik("Marko Markovic");
+		Putnik p2 = new Putnik("Violeta Sljivic");
+		Putnik p3 = new Putnik("Lidija Vucinic");
+		System.out.println(v1);
+		a1.addGorivo(20);
+
+		if (a1.postaviPutnika(p1, 2))
+			System.out.println("Putnik" + p1 + " je postavljen na mesto." );
+		else
+			System.out.println("Putnik" + p1 + " nije postavljen na mesto.");
+		if (a1.postaviPutnika(p3, 1))
+			System.out.println("Putnik" + p3 + " je postavljen na mesto.");
+		else
+			System.out.println("Putnik" + p3 + " nije postavljen na mesto.");
+		if (a1.postaviPutnika(p2, 2))
+			System.out.println("Putnik" + p2 + " je postavljen na mesto.");
+		else
+			System.out.println("Putnik" + p2 + " nije postavljen na mesto.");
+		System.out.println(a1);
+		a1.subGorivo(50);
+		a1.ukloniPutnika(2);
+		System.out.println(a1);
+		System.out.println(a2);
+
+		av1.addGorivo(300);
+		av1.postaviPutnika(p1, 20);
+		av1.postaviPutnika(p1, 4);
+		av1.postaviPutnika(p2, 7);
+		av1.postaviPutnika(p2, 4);
+		av1.postaviPutnika(p3, 1);
+		System.out.println(av1);
+		System.out.println();
+		System.out.println(av2);
+
+	}
+
+}

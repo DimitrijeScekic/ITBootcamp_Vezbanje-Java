@@ -1,0 +1,28 @@
+package apstraktneKlase;
+
+public class GlavniTrougao {
+
+	public static void main(String[] args) {
+
+		PravougliTrougao pt = new PravougliTrougao();
+pt.setA(3);
+pt.setB(4);
+pt.setC(5);
+
+System.out.println(pt);
+System.out.println("Obim pravouglog trougla je; " + pt.obim());
+System.out.println("Povrsina pravouglog trougla je; " + pt.povrsina());
+
+JednakostranicniTrougao jt = new JednakostranicniTrougao();
+jt.setA(5);
+jt.setB(5);
+jt.setC(5);
+
+System.out.println(jt);
+System.out.println("Obim jednakostranicnog trougla je; " + jt.obim());
+System.out.println("Povrsina jednakostranicnog trougla je; " + jt.povrsina());
+
+
+	}
+
+}

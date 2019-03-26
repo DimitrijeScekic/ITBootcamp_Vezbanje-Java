@@ -1,0 +1,106 @@
+package prevoznoSredstvo;
+
+//kreirati paket prevozno sredstvo, kreirati klasu vozilo
+//koja poseduje broj mesta za prevoz putnika INT
+//vozilo takodje poseduje gorivo DOUBLE;
+//kapacitet prevoza putnika se zadaje prilikom kreiranja vozila
+//i nemoguce ga je promeniti GET
+//automobil je vozilo koje sadrzi odredjen broj putnika,
+//registarski broj STRING, poseduje snagu DOUBLE,
+//avion je vozilo koje sadrzi putnike
+//i koje ima jedinstveni serijski broj String, marku STRING,
+//kao i klasu putnika koju
+//koje prevozi STRING
+//putnik ima ime i prezime STRING,
+//i jedinstveni id koji se automatski dodeduljuje
+//vozilo isto ima jedinstveni id koji se automatski dodeljuje
+//u vozilo je moguce postaviti i ukloniti putnika na neko od mesta
+//povratna vrednost je indikator da li je putnik uspesno uklonjen ili nije BOOLEAN
+//VOZILO(ID:<GORIVO>:BRPUTNIKA{SVIPUTNICI})
+//AUTOMOBIL(ID:REGBROJ:<GORIVO>:BRPUTNIKA{SVIPUTNICI})
+//AVION(ID:SERBROJ:<GORIVO>:BRPUTNIKA{SVIPUTNICI})
+//za putnika: [ID:IME_PREZIME]
+
+public class Avion extends Vozilo {
+	
+	private int uSerNum;
+	private String marka;
+	private String klasaPutnika;
+	private Putnik p;
+	
+	public Avion(double gorivo, int k, int uSerNum, String marka) {
+		super(gorivo, k);
+		this.uSerNum = uSerNum;
+		this.marka = marka;
+		this.mesta = new Putnik[k];
+		this.klasaPutnika = "";
+	}
+
+	public int getuSerNum() {
+		return uSerNum;
+	}
+
+	public void setuSerNum(int uSerNum) {
+		this.uSerNum = uSerNum;
+	}
+
+	public String getMarka() {
+		return marka;
+	}
+
+	public void setMarka(String marka) {
+		this.marka = marka;
+	}
+
+	public String getKlasaPutnika() {
+		return klasaPutnika;
+	}
+
+	public Putnik getP() {
+		return p;
+	}
+
+	public void setP(Putnik p) {
+		this.p = p;
+	}
+
+	public void setKlasaPutnika(String klasaPutnika) {
+		this.klasaPutnika = klasaPutnika;		
+	}
+	
+	@Override
+	public boolean postaviPutnika(Putnik p, int i) {
+		if (i >= this.mesta.length || i < 0)
+			return false;
+		if (mesta[i] != null)
+			return false;
+		for (int j = 0; j < mesta.length; j++) {
+			if (mesta[j] != null) {
+				if (mesta[j] == p) {
+					return false;
+				}
+			}
+		}
+		mesta[i] = p;
+	//	p.setklasaPutnika();
+		return true;
+	}
+
+
+
+	public String toString() {
+
+		StringBuilder sb = new StringBuilder("Avion");
+		sb.append("(");
+		sb.append(this.getId()).append(":");
+		sb.append(this.uSerNum).append(":<");
+		sb.append(this.getGorivo()).append(">:");
+		sb.append(this.getBrPutnika()).append("{");
+		for (int i = 0; i < mesta.length; i++) {
+			if (mesta[i] != null)
+				sb.append(mesta[i]).append(getKlasaPutnika());
+		}
+		sb.append("}");
+		return sb.toString();
+	}
+}

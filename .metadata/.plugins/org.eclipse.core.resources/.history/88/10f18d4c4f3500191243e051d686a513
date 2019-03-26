@@ -1,0 +1,27 @@
+package glavni;
+
+import java.util.Scanner;
+
+public class Stepen {
+
+	public static void main(String[] args) {
+		
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Unesite broj k : ");
+		int k = scanner.nextInt();
+		System.out.println("Unesite broj n : ");
+		int n = scanner.nextInt();
+		int stepen=1;
+		int i =0;
+		if(k>0 && n>0) {
+			while(i<n){
+				stepen*=k;
+			}
+			System.out.println(stepen);
+		}else
+			System.out.println("Niste uneli brojeve vece od nule");
+		
+
+	}
+
+}

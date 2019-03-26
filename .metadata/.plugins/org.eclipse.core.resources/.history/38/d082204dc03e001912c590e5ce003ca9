@@ -1,0 +1,19 @@
+package klaseV;
+
+public class RacunMain {
+
+	public static void main(String[] args) {
+
+		Racun r = new Racun("123-2345-987", 3000.00);
+		r.dodajNovac(3000.00);
+		ispisiStanjeRacuna(r);
+		r.uzmiNovac(9000.00);
+		ispisiStanjeRacuna(r);
+		
+		System.out.println(r.uzmiPodatke());
+	}
+
+	public static void ispisiStanjeRacuna(Racun r) {
+		System.out.println(r.getBrojRacuna() + "  " + r.getStanje());
+	}
+}

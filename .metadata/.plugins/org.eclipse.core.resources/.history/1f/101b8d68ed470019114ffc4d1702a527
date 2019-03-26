@@ -1,0 +1,49 @@
+package interfejs;
+
+//Napisati program koji iz baze pdoataka Banka.db ispisuje sve filijale, kao i naziv mesta gde se nalaze. 
+
+import java.sql.*;
+
+public class DBBanka2 {
+
+	String connectionString;
+	Connection connection;
+
+	public DBBanka2(String connectionString) {
+		this.connectionString = connectionString;
+	}
+
+	// Connect i disconnect su suvisne (za ovakav kod)
+	void connect() throws SQLException {
+		disconnect();
+		connection = DriverManager.getConnection(connectionString);
+	}
+
+	private void disconnect() throws SQLException {
+		if (connection != null && !connection.isClosed())
+			connection.close();
+
+	}
+
+	public void printNameAdress() throws SQLException {
+
+		try (Connection connection = DriverManager.getConnection(connectionString);
+				Statement statement = connection.createStatement()) {
+			final ResultSet resultSet = statement.executeQuery(
+					//"SELECT k.IDKom,k.Naziv,r.IDRac, r.Stanje FROM Racun r, Komitent k WHERE k.IDKom=r.IDKom");
+					"SELECT Filijala.Naziv as Filijala , Mesto.Naziv as Mesto FROM Filijala INNER JOIN Mesto on Filijala.IdMes = Mesto.IdMes");
+			// statement.executeQuery koristiti samo za SELECT upite
+
+			while (resultSet.next()) { // dok postoji red za citanje -> ucitaj
+
+				// Iz ucitanog reda preuzmi kolone
+				// Paznja: Indeksi kolona se broje od 1 (ne od 0)
+				String nazivFilijale = resultSet.getString(1);
+				String nazivMesta = resultSet.getString(2);
+				System.out.println(nazivFilijale + "\t" + nazivMesta );
+			}
+
+		}
+
+	}
+}

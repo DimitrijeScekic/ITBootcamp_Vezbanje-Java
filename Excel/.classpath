@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/Users/Dimitrije/Downloads/POI Biblioteke (1)/Biblioteke/commons-collections4-4.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dimitrije/Downloads/POI Biblioteke (1)/Biblioteke/commons-compress-1.18.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dimitrije/Downloads/POI Biblioteke (1)/Biblioteke/poi-4.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dimitrije/Downloads/POI Biblioteke (1)/Biblioteke/poi-excelant-4.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dimitrije/Downloads/POI Biblioteke (1)/Biblioteke/poi-ooxml-4.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dimitrije/Downloads/POI Biblioteke (1)/Biblioteke/poi-ooxml-schemas-4.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dimitrije/Downloads/POI Biblioteke (1)/Biblioteke/poi-scratchpad-4.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dimitrije/Downloads/POI Biblioteke (1)/Biblioteke/resolver.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dimitrije/Downloads/POI Biblioteke (1)/Biblioteke/xalan.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dimitrije/Downloads/POI Biblioteke (1)/Biblioteke/xbean.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dimitrije/Downloads/POI Biblioteke (1)/Biblioteke/xbean_xpath.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dimitrije/Downloads/POI Biblioteke (1)/Biblioteke/xbeans.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dimitrije/Downloads/POI Biblioteke (1)/Biblioteke/xerces.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dimitrije/Downloads/POI Biblioteke (1)/Biblioteke/xml-apis.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dimitrije/Downloads/POI Biblioteke (1)/Biblioteke/xmlpublic.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dimitrije/Downloads/POI Biblioteke (1)/Biblioteke/xsltc.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

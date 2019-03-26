@@ -1,0 +1,17 @@
+package stariPaket;
+
+public class Glavna {
+
+	public static void main(String[] args) {
+Animal a1 = new Animal();
+System.out.println(a1);
+a1.changeState();
+System.out.println(a1);
+
+Uredjaj u1 = new Uredjaj();
+System.out.println(u1);
+u1.changeState();
+System.out.println(u1);
+}
+
+}

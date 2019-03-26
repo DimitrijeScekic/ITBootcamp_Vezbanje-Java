@@ -1,0 +1,115 @@
+package prevoznoSredstvo;
+
+//kreirati paket prevozno sredstvo, kreirati klasu vozilo
+//koja poseduje broj mesta za prevoz putnika INT
+//vozilo takodje poseduje gorivo DOUBLE;
+//kapacitet prevoza putnika se zadaje prilikom kreiranja vozila
+//i nemoguce ga je promeniti GET
+//automobil je vozilo koje sadrzi odredjen broj putnika,
+//registarski broj STRING, poseduje snagu DOUBLE,
+//avion je vozilo koje sadrzi putnike
+//i koje ima jedinstveni serijski broj String, marku STRING,
+//kao i klasu putnika koju
+//koje prevozi STRING
+//putnik ima ime i prezime STRING,
+//i jedinstveni id koji se automatski dodeduljuje
+//vozilo isto ima jedinstveni id koji se automatski dodeljuje
+//u vozilo je moguce postaviti i ukloniti putnika na neko od mesta
+//povratna vrednost je indikator da li je putnik uspesno uklonjen ili nije BOOLEAN
+//VOZILO(ID:<GORIVO>:BRPUTNIKA{SVIPUTNICI})
+//AUTOMOBIL(ID:REGBROJ:<GORIVO>:BRPUTNIKA{SVIPUTNICI})
+//AVION(ID:SERBROJ:<GORIVO>:BRPUTNIKA{SVIPUTNICI})
+//za putnika: [ID:IME_PREZIME]
+
+//public svi vide, private samo unutar klase, protected samo unutar paketa
+
+public class Vozilo {
+	protected Putnik[] mesta;
+	private double gorivo;
+	public static int uid = 0;
+	private int id = 0;
+
+	// k je broj mesta u vozilu
+	public Vozilo(double gorivo, int k) {
+		this.id = ++uid;
+		this.gorivo = gorivo;
+		this.mesta = new Putnik[k];
+	}
+
+	public double getGorivo() {
+		return gorivo;
+	}
+
+	public void addGorivo(int value) {
+		if (value >= 0)
+			gorivo += value;
+	}
+
+	public void subGorivo(int value) {
+		if (value >= 0 && value <= this.gorivo)
+			gorivo -= value;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public boolean postaviPutnika(Putnik p, int i) {
+		if (i >= this.mesta.length || i < 0)
+			return false;
+		if (mesta[i] != null)
+			return false;
+		for (int j = 0; j < mesta.length; j++) {
+			if (mesta[j] != null) {
+				if (mesta[j] == p) {
+					return false;
+				}
+			}
+		}
+		mesta[i] = p;
+		return true;
+	}
+
+	public boolean ukloniPutnika(int i) {
+		if (i >= this.mesta.length || i < 0)
+			return false;
+		if (mesta[i] == null) {
+			return true;
+		}
+		mesta[i] = null;
+		return true;
+	}
+
+	public int getBrPutnika() {
+		int br = 0;
+		for (int i = 0; i < mesta.length; i++) {
+			if (mesta[i] != null)
+				br++;
+		}
+		return br;
+	}
+
+	public String toString() {
+
+		StringBuilder sb = new StringBuilder("Vozilo");
+		sb.append("(");
+		sb.append(this.getId()).append(":<");
+		sb.append(this.getGorivo()).append(">:");
+		sb.append(this.getBrPutnika()).append("{");
+		for (int i = 0; i < mesta.length; i++) {
+			if (mesta[i] != null)
+				sb.append(mesta[i]);
+		}
+		sb.append("}");
+		return sb.toString();
+	}
+
+	/*
+	 * @Override public String toString() { return "VOZILO (" + this.getId() + ":<"
+	 * + this.getGorivo() + ">:" + this.getBrPutnika() + "{" + this.mesta[] + "}"; }
+	 */
+}

@@ -1,0 +1,155 @@
+package com.mallocinc.ytm.testing.core.helpers;
+
+import org.openqa.selenium.By;
+
+import com.mallocinc.ytm.testing.config.TestConfig;
+import com.mallocinc.ytm.testing.core.WebDriverExtended;
+import com.mallocinc.ytm.testing.core.pages.LoginPage;
+import com.mallocinc.ytm.testing.util.UtilRandomizer;
+
+/**
+ * Convinent methods for using the Login page.
+ * 
+ * @author Danilo
+ * 
+ */
+public class LoginPageTestHelper extends LoginPage {
+
+	private WebDriverExtended webDriverExtended;
+	
+	
+	public LoginPageTestHelper(WebDriverExtended webDriverExtended) {
+		this.webDriverExtended = webDriverExtended;
+	}
+
+	public void typeUsername(String value) throws Exception {
+		webDriverExtended.type(LoginPage.INPUT_USERNAME, value); 
+	}
+
+	public void typePassword(String value) throws Exception {
+		webDriverExtended.type(LoginPage.INPUT_PASSWORD, value);
+	}
+
+	public void pressSignIn() throws Exception {
+		webDriverExtended.click(LoginPage.BUTTON_SIGN_IN);
+	}
+
+	public void pressContact() throws Exception {
+		webDriverExtended.click(LoginPage.MENU_ITEM_CONTACT);
+	}
+
+	public void sendContact() throws Exception {
+		webDriverExtended.type(CONTACT_FORM_EMAIL, "sofijavalidity@gmail.com");
+		webDriverExtended.type(CONTACT_FORM_SUBJECT, "Test email");
+		webDriverExtended.type(CONTACT_FORM_BODY, "Test email");
+		webDriverExtended.type(LoginPage.CONTACT_FORM_CAPTCHA_USER, webDriverExtended.getValue(CONTACT_FORM_CAPTCHA, "value").toString());
+		webDriverExtended.click(CONTACT_FORM_BUTTON_SEND);
+		/*
+		 * webDriverExtended.findElement(LoginPage.CAPTCHA_VALUE).getAttribute("value")
+		 * typeCaptcha("");
+		 */
+	}
+
+	public void pressForgotPass() throws Exception {
+		webDriverExtended.click(LoginPage.BUTTON_FORGOT_PASSWORD);
+	}
+	public void pressSignIn2() throws Exception {
+		webDriverExtended.click(LoginPage.BUTTON_SIGN_IN2);
+	}
+	public void typeRegUsername(String value) throws Exception {
+		webDriverExtended.type(LoginPage.REG_USERNAME, value);
+	}
+
+	public void typeRegEmail(String value) throws Exception {
+		webDriverExtended.type(LoginPage.REG_EMAIL, value);
+	}
+
+	public void typeCaptcha(String value) throws Exception {
+		webDriverExtended.type(LoginPage.CAPTCHA, value);
+	}
+
+	public void typeCaptcha() throws Exception {
+		webDriverExtended.type(LoginPage.CAPTCHA, webDriverExtended.getValue(CAPTCHA_VALUE, "value").toString());
+
+	}
+
+	public void typeRegFirstName(String value) throws Exception {
+		webDriverExtended.type(LoginPage.REG_FIRST_NAME, value);
+	}
+
+	public void typeRegLastName(String value) throws Exception {
+		webDriverExtended.type(LoginPage.REG_LAST_NAME, value);
+	}
+
+	public void logout2() throws Exception {
+
+		webDriverExtended.click(LoginPage.show_logout_button);
+
+		webDriverExtended.click(LoginPage.logout_button);
+
+	}
+
+	public void typeRegBirthDate(String value) throws Exception {
+		webDriverExtended.type(LoginPage.INPUT_REG_BIRTH_DATE, value);
+		webDriverExtended.click(REG_LAST_NAME);
+	}
+
+	/*public void selectRegRole() throws Exception {
+		System.out.println("Selecting role from drop-down menu ");
+		webDriverExtended.click(By.id("regForm:roles_label")); 
+		Thread.sleep(2000);
+		webDriverExtended.click(By.id("regForm:roles_2")); 
+	}*/
+
+	public void goToRegisterForm() throws Exception {
+		System.out.println(" Press Register button ... ");
+		webDriverExtended.click(LoginPage.BUTTON_THREE_LINE);
+	}
+
+	public void pressRegisterRequest() throws Exception {
+		System.out.println(" Press Sign-up button ... ");
+		webDriverExtended.click(LoginPage.BUTTON_REGISTER);
+	}
+
+	//
+	public void selectEnglish() throws Exception {
+		webDriverExtended.click(LoginPage.LANGUAGE_MENU);
+		webDriverExtended.click(By.xpath(LoginPage.ENGLISH));
+	}
+
+	public void typeForgotPassCredentials() throws Exception {
+		webDriverExtended.type(FORGOT_PASS_USERNAME, TestConfig.TEST_USERNAME);
+		webDriverExtended.type(FORGOT_PASS_EMAIL, TestConfig.TEST_EMAIL);
+	}
+	
+
+
+	public void clickForgotPassSubmit() throws Exception {
+		webDriverExtended.click(BUTTON_FORGOT_PASS_SUBMIT);
+	}
+
+	public void createRegisterRequest() throws Exception {
+
+		//goToRegisterForm();
+		webDriverExtended.scrollUnderElement(LoginPage.REG_EMAIL);
+		typeRegEmail(email);
+		typeRegUsername(username + UtilRandomizer.randInt(1, 100000)); 
+		typeRegFirstName("Name" + UtilRandomizer.randInt(1, 100000));
+		typeRegLastName("Surname" + UtilRandomizer.randInt(1, 100000));
+		typeRegBirthDate(UtilRandomizer.randDateTotal());
+		selectRegRole();
+		Thread.sleep(2000);
+		typeCaptcha();
+		Thread.sleep(1000);
+		pressRegisterRequest();
+		Thread.sleep(6000);
+	} 
+
+	public void sendContactMail() throws Exception {
+		pressContact();
+		sendContact();
+
+	}
+
+
+}

@@ -1,0 +1,38 @@
+package interfejs;
+
+import java.sql.SQLException;
+import java.util.Scanner;
+
+public class Main2 {
+
+	public static void main(String[] args) {
+
+		DBBanka database = new DBBanka("jdbc:sqlite:Banka.db");
+
+	//	Scanner sc = new Scanner(System.in);
+
+		try {
+			database.printNameAdress();
+
+			try {
+				database.makeTransferFaultAnomaly(1, 4, sc.nextFloat());
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				// Hmmm. Nestala struja? Kako se ovo izvrsava???
+				// Pogresno stanje!
+			}
+			database.printBankAccount();
+
+			try {
+				database.makeTransfer(1, 4, sc.nextFloat());
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				// Hmmm. Nestala struja? Kako se ovo izvrsava???
+			}
+			database.printBankAccount();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+}

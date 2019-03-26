@@ -1,0 +1,92 @@
+package vezbanjeZaTest;
+
+/* Vozilo(Apstraktna klasa) poseduje jedinstveni identifikator koji se dodeljuje automatski prilikom kreiranja.
+ *  Vozilo poseduje prosecnu potrosnju koja se dodeljuje prilikom kreiranja i ne moze da se promeni ali se moze dohvatiti.
+ *   Vozilo se stvara bez goriva, koje se posle moze dodati, oduzeti i dohvatiti.
+ *    Moguce je da vozilo predje zadat broj kilometara.
+ *     Vozilo poseduje jednoslovnu oznaku koja moze da se dohvati.
+ *      Moze da se ispise u formatu OZNAKA[ID{PROSECNA POTROSNJA}:TRENUTNO_GORIVO]
+ */
+/*
+Automobil je vozilo koje poseduje i registracioni broj. 
+Automobil kada predje zadat broj kilometara ono potrosi goriva jednako formuli km*prosecna_potrosnja. 
+Takodje je potrebno vratiti informaciju koliko je goriva potroseno. 
+Auto ne moze da predje zadat broj kilometara ako nema dovoljno goriva za to. 
+Jednoslovna oznaka je A. Moze da se ispise u formatu VOZILO:REG_BROJ
+
+Kamion je vozilo koje poseduje i serijski broj. 
+Kamion kada predje zadat broj kilometara ono potrosi goriva jednako formuli 4*km*prosecna_potrosnja.
+Takodje je potrebno vratiti informaciju koliko je goriva potroseno.
+Kamion ne moze da predje zadat broj kilometara ako nema dovoljno goriva za to.
+Jednoslovna oznaka je K. Moze da se ispise u formatu VOZILO:SER_BROJ
+
+Napisati glavni program koji testira rad ovih klasa. */
+
+public class Automobil extends Vozilo {
+	private String regBroj;
+	private char oznaka ;
+
+
+	public Automobil(double prosecnaPotrosnja, String regBroj) {
+		super(prosecnaPotrosnja);
+		this.regBroj = regBroj;
+	}
+
+
+	public String getRegBroj() {
+		return regBroj;
+	}
+
+	public void setRegBroj(String regBroj) {
+		this.regBroj = regBroj;
+	}
+	
+	double potrosenoGorivo;
+	double trenutnoGorivo;
+	
+	@Override
+	public double predjiPut(int daljina) {
+		if (potrosenoGorivo < getGorivo()) {
+		potrosenoGorivo = daljina * getProsecnaPotrosnja();
+			return potrosenoGorivo;
+		} else
+			return -1;
+	}
+	
+	@Override
+	public double potrosenoGoriva(double kilometraza) {
+		if (potrosenoGorivo < getGorivo()) {
+		potrosenoGorivo = kilometraza * getProsecnaPotrosnja();
+			return potrosenoGorivo;
+		} else
+			return -1;
+	}
+	
+	
+	@Override
+	public double trenutnoGoriva() {
+			trenutnoGorivo = getGorivo() - potrosenoGorivo;
+			return trenutnoGorivo;		
+	}
+	
+
+	public void setOznaka(char oznaka) {
+		oznaka = 'A';
+	}
+	
+	
+	public char getOznaka() {
+		return oznaka;
+	}
+
+
+	public String toString() {
+
+		StringBuilder sb = new StringBuilder(super.toString());
+		sb.append(":");
+		sb.append(this.regBroj);
+		return sb.toString();
+	}
+	
+
+}

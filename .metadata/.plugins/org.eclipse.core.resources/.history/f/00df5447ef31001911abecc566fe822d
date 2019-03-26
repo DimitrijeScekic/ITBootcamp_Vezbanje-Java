@@ -1,0 +1,18 @@
+package glavni;
+
+import java.util.Scanner;
+
+public class Parnost {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		double broj = sc.nextDouble();
+		System.out.println("Unesite broj: ");
+		if (broj > 0) {
+			System.out.println("Broj je paran !");
+		} else {
+			System.out.println("Broj je neparan !");
+		}
+	}
+
+}

@@ -1,0 +1,17 @@
+package stariPaket;
+
+public class Animal implements IChangeable {
+
+	@Override
+	public void changeState() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void printState() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

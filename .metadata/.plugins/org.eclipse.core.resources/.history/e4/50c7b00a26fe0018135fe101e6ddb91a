@@ -1,0 +1,64 @@
+package com.mallocinc.ytm.testing.core.pages;
+
+import org.openqa.selenium.By;
+
+/**
+ * This class will contain convenient constants for elements inside login page.
+ * By - is a class that selenium uses for selecting elements on pages.
+ * 
+ * @author Danilo
+ * 
+ */
+public class LoginPage {
+	
+	public static  String email = "noreply@youtestme.com";
+	public static  String username = "test"; 
+	public static  int randInt ; 
+
+	public static final By INPUT_USERNAME = By.id("loginForm:username");
+	public static final By INPUT_PASSWORD = By.id("loginForm:password");
+	public static final By BUTTON_SIGN_IN = By.id("loginForm:signInBtn");
+	public static final By BUTTON_THREE_LINE = By.id("loginForm:registerButton");
+	public static final By MENU_ITEM_CONTACT = By.linkText("Contact");
+	public static final By BUTTON_FORGOT_PASSWORD = By.id("loginForm:fogotPassBtn");
+	public static final By MENU_ITEM_REGISTER = By.linkText("Registracija");
+	public static final By REG_USERNAME = By.id("regForm:username");
+	public static final By REG_EMAIL = By.id("regForm:email");
+	public static final By CAPTCHA = By.id("regForm:captchaCodeUser");
+	public static final By CAPTCHA_VALUE = By.id("regForm:captchaCode");
+	public static final By REG_FIRST_NAME = By.id("regForm:firstName");
+	public static final By REG_LAST_NAME = By.id("regForm:lastName");
+	public static final By BUTTON_REGISTER = By.id("regForm:regBtn"); 
+	public static final By BUTTON_SIGN_IN2 = By.id("regForm:j_idt49");
+	public static final By INPUT_REG_BIRTH_DATE = By.id("regForm:birth_input");
+	public static final String REG_ROLES_BASE = "regForm:roles";// base is the
+																// base id for
+																// composite
+																// component. On
+																// this will be
+																// added label,
+																// panel etc.
+	
+	
+
+	public static final int REG_ROLE_STUDENT = 1;
+	public static final int REG_ROLE_PROFESSOR = 2;
+	public static final int REG_ROLE_ADMINISTRATOR = 3;
+	public static final By LANGUAGE_MENU = By.id("navForm:languageMenu_button");
+	public static final String ENGLISH = "//div[@id='navForm:languageMenu_menu']/ul/li/a/span";
+	
+	public static final By CONTACT_FORM_EMAIL = By.id("contactform:email");
+	public static final By CONTACT_FORM_SUBJECT = By.id("contactform:subject");
+	public static final By CONTACT_FORM_BODY = By.id("contactform:body");
+	public static final By CONTACT_FORM_BUTTON_SEND = By.id("contactform:sendMailBtn");
+	public static final By CONTACT_FORM_CAPTCHA_USER = By.id("contactform:captchaCodeUserContact");
+	public static final By CONTACT_FORM_CAPTCHA = By.id("contactform:captchaCodeContact");
+
+	public static final By show_logout_button = By.id("menuForm:signoutBtn");
+	public static final By logout_button = By.id("menuForm:logOutSel");
+	
+	public static final By FORGOT_PASS_USERNAME = By.id("passform:usernameF");
+	public static final By FORGOT_PASS_EMAIL = By.id("passform:emailF");
+	public static final By BUTTON_FORGOT_PASS_SUBMIT = By.id("passform:submitButton");
+	
+}

@@ -1,0 +1,50 @@
+package glavni;
+
+import java.util.Scanner;
+
+public class cifre {
+
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Unesite broj : ");
+		int n = scanner.nextInt();
+
+		int zaProveru = n;
+		int temp;
+		int sum = 0;
+		int prod = 1;
+		int obrnuti = 0;
+
+		if (n > 0) {
+			while (n > 0) {
+				temp = n % 10;
+				n /= 10;
+				System.out.print(temp + " ");
+				
+				if (temp % 2 == 0) {
+					sum += temp;
+
+				} else {
+					prod *= temp;
+				}				
+				obrnuti *= 10;
+				obrnuti += temp;
+			}
+			System.out.println();
+			System.out.println("Zbir parnih brojeva je " + sum);
+			System.out.println("Proizvod neparnih brojeva je " + prod);
+			System.out.println("Obrnuti broj je " + obrnuti);
+
+			if (zaProveru == obrnuti) {
+				System.out.println("Broj je palindrom.");
+			} else {
+				System.out.println("Broj nije palindrom.");
+			}
+
+		} else {
+			System.out.println("Invalidna vrednost.");
+		}
+		scanner.close();
+	}
+
+}

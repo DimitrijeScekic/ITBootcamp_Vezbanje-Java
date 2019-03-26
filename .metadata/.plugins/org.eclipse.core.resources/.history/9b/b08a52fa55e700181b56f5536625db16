@@ -1,0 +1,25 @@
+package com.mallocinc.ytm.testing.tests.other;
+
+import java.util.ArrayList;
+
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
+
+import com.mallocinc.ytm.testing.config.TestConfig;
+import com.mallocinc.ytm.testing.tests.profiles.TestDeclineRegRequest;
+
+@RunWith(Suite.class)
+@SuiteClasses({ TestRegisterTryout.class, TestDeclineRegRequest.class })
+public class TestSuitesDimitrije {
+	public void suiteInstance() {
+		
+		ArrayList<String> url = new ArrayList<String>();
+		url.add(TestConfig.TEST_6);
+		url.add(TestConfig.TEST_5);
+		// url.add(TestConfig.TEST_12);
+		for (int i = 0; i < url.size(); i++) {
+			TestConfig.testUrl = url.get(i);
+		}
+	}	 
+}

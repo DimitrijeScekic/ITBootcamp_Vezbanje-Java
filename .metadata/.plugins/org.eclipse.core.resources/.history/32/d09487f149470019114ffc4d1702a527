@@ -1,0 +1,15 @@
+package noviPaket;
+
+public class Toranj {
+
+	public static void main(String[] args) {
+		
+Avion a1 = new Avion();
+a1.sBroj = "001";
+a1.altitude = 15;
+a1.longitude = 12;
+
+IMovable im = a1;
+
+}
+}

@@ -1,0 +1,13 @@
+package apstraktneKlase;
+
+public class JednakostranicniTrougao extends Trougao{
+
+	@Override
+	public double povrsina() {
+		return getA()  * getA() * Math.sqrt(3) / 2 ;
+	}
+	@Override
+	public String toString() {
+		return "P(" + getA()+ "," + getB()+ "," + getC() + ")";
+	}
+}

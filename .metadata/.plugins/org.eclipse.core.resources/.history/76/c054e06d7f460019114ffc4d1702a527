@@ -1,0 +1,19 @@
+package greske;
+
+public class z1 {
+
+	public static void main(String[] args) {
+		int n = 0;
+		String s;
+		s = null;
+		int[] abc = new int[10];
+		try {
+			System.out.println(abc[20]);
+		} catch (Exception ex) {
+			System.out.println("Doslo je do greske. Poruka je: " + ex);
+		}finally {
+			System.out.println("Ovo ce se svakako izvrsiti");
+		}
+		
+	}
+}

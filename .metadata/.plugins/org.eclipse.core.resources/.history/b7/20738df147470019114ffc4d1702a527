@@ -1,0 +1,5 @@
+package noviPaket;
+
+public interface IMovable {
+
+}

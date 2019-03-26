@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. --><project basedir="." default="build" name="ytm_testing_functional">
+    <property environment="env"/>
+    <property name="junit.output.dir" value="junit"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.8"/>
+    <property name="source" value="1.8"/>
+    <path id="JUnit 4.libraryclasspath">
+        <pathelement location="../../../Users/Dimitrije/Downloads/eclipse-java-2018-09-win32-x86_64/eclipse/plugins/org.junit_4.12.0.v201504281640/junit.jar"/>
+        <pathelement location="../../../Users/Dimitrije/Downloads/eclipse-java-2018-09-win32-x86_64/eclipse/plugins/org.hamcrest.core_1.3.0.v20180420-1519.jar"/>
+    </path>
+    <path id="ytm_testing_functional.classpath">
+        <pathelement location="bin"/>
+        <pathelement location="lib/junit-4.10.jar"/>
+        <pathelement location="lib/selenium-server-standalone-3.14.0.jar"/>
+        <pathelement location="lib/client-combined-3.14.0.jar"/>
+        <path refid="JUnit 4.libraryclasspath"/>
+    </path>
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+    <target name="AddMembersInSubjectTestCase">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.nikola.testcase.AddMembersInSubjectTestCase" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="CloneAndDeleteSubjectTestCase">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.nikola.testcase.CloneAndDeleteSubjectTestCase" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="CreateNewPoolTestCase">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.nikola.testcase.CreateNewPoolTestCase" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="CreateNewQuestionTestCase">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.nikola.testcase.CreateNewQuestionTestCase" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="CreateNewSubjectTestCase">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.nikola.testcase.CreateNewSubjectTestCase" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="CreateNewSubscribersTestCase">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.nikola.testcase.CreateNewSubscribersTestCase" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="CreateNewUserTestCase">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.nikola.testcase.CreateNewUserTestCase" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="LogInChangeUserLogOut">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.tests.other.LogInChangeUserLogOut" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="LogInOutTestCase">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.nikola.testcase.LogInOutTestCase" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="MoveQuestionToOtherPoolTestCase">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.nikola.testcase.MoveQuestionToOtherPoolTestCase" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="Probna">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.nikola.testcase.Probna" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="SuiteAllTestMilica">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.suites.SuiteAllTestMilica" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="SuiteAllTestMilos">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.suites.SuiteAllTestMilos" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="SuiteTestDimitrije">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.suites.SuiteTestDimitrije" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="TestApproveRegRequest">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.tests.profiles.TestApproveRegRequest" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="TestBasic">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.tests.demo.TestBasic" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="TestChangeStatusOfUsers">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.tests.profiles.TestChangeStatusOfUsers" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="TestContactFromLoginPage">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.tests.other.TestContactFromLoginPage" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="TestCreateClass">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.tests.courses.TestCreateClass" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="TestCreateCompleteCourse">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.tests.courses.TestCreateCompleteCourse" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="TestCreateCourse">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.tests.courses.TestCreateCourse" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="TestCreateGrading">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.tests.grading.TestCreateGrading" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="TestCreateGroup">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.tests.groups.TestCreateGroup" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="TestCreateNewGeneratedQuiz">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.tests.quizzes.TestCreateNewGeneratedQuiz" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="TestCreateNewManualQuiz">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.tests.quizzes.TestCreateNewManualQuiz" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="TestCreateNewManualTest">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.tests.quizzes.TestCreateNewManualTest" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="TestCreateNewRole">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.nikola.testcase.TestCreateNewRole" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="TestCreatePool">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.tests.pools.TestCreatePool" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="TestCreateProfiling">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.tests.profiling.TestCreateProfiling" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="TestCreateSubscriber">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.tests.subscribers.TestCreateSubscriber" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="TestCreateUser">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.tests.profiles.TestCreateUser" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="TestDeclineRegRequest">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.tests.profiles.TestDeclineRegRequest" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="TestDeleteGroupMember">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.tests.groups.TestDeleteGroupMember" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="TestDoATest">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.tests.quizzes.TestDoATest" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="TestForgotPassword">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.tests.other.TestForgotPassword" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="TestIndexSearch">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.tests.index.TestIndexSearch" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="TestIndexSearchGC">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.tests.index.TestIndexSearchGC" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="TestManualQuizGeneratedFromPool">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.tests.quizzes.TestManualQuizGeneratedFromPool" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="TestRegisterRequest">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.tests.other.TestRegisterRequest" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="TestRegisterTryout">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.tests.other.TestRegisterTryout" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="TestSetupLocal">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.tests.base.TestSetupLocal" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="TestSignInOut">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.tests.other.TestSignInOut" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="TestSuitesDimitrije">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.tests.other.TestSuitesDimitrije" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="TestSystemMail">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.tests.preferences.TestSystemMail" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="MoveQuestionToOtherPool">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.mallocinc.ytm.testing.tests.pools.MoveQuestionToOtherPool" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="ytm_testing_functional.classpath"/>
+        </junit>
+    </target>
+    <target name="junitreport">
+        <junitreport todir="${junit.output.dir}">
+            <fileset dir="${junit.output.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${junit.output.dir}"/>
+        </junitreport>
+    </target>
+</project>

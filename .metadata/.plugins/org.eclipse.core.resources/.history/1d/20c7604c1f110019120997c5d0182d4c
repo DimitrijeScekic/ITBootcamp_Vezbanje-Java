@@ -1,0 +1,127 @@
+package com.mallocinc.ytm.testing.config;
+
+import com.mallocinc.ytm.testing.core.BrowserType;
+import com.mallocinc.ytm.testing.suites.SuiteTestConfig;
+
+/**
+ * 
+ * @author Danilo. This is the configuration class. Browser selection, url,
+ *         ports, standard test user and password should be set here.
+ * 
+ *
+ */
+
+public class TestConfig {
+
+	public static SuiteTestConfig STC = new SuiteTestConfig();
+
+	public static final String MALLOCINC_URL = "http://mallocinc.dnsalias.com:55241/ytm/";
+	public static final String LOCAL_URL = "http://localhost:8080/ytm.webview/";
+	public static final String LOCAL_URL_8443 = "http://localhost:8443/ytm.webview/";
+	public static final String LOCAL_URL_8081 = "http://localhost:8081/ytm.webview/";
+	public static final String LOCAL_URL_9999 = "http://localhost:9999/ytm.webview/";
+	public static final String MALLOCINC_URL2 = "http://206.248.172.39:55241/ytm/";
+	public static final String MALLOCINC_URL_SEC = "http://206.248.172.39:55242/ytm20/";
+	public static final String MALLOCINC_JUNK_DATA_HOST = "http://206.248.172.39:55241/ytm/";
+	public static final String MALLOCINC_LOAD_STRESS_TESTING = "http://206.248.172.39:55242/ytm20/";
+	public static final String MALLOCINC_DEMO_SITE = "http://206.248.172.39:55243/ytm30/";
+	public static String SUIT_USER = STC.setupUser();
+	public static String SUIT_PASSWORD = STC.setupPass();
+	
+	//public static final String ADMIN_USERNAME = "admin2"; 
+	public static final String ADMIN_USERNAME = "selenium";   
+	public static final String ADMIN_PASSWORD = "Admin12#";
+	public static final String INSTUCTOR_USERNAME = "admin";   
+	public static final String INSTUCTOR_PASSWORD = "Admin12#";
+	public static final String STUDENT_USERNAME = "admin";   
+	public static final String STUDENT_PASSWORD = "Admin12#";
+	public static final String MANUAL_USER = "admin";
+	public static final String MANUAL_PASSWORD = "Admin12#";
+	public static final String TESTER_USERNAME = "tester1";   
+	public static final String TESTER_PASSWORD = "Tester12#";
+	
+	
+	public static final String TEST_USERNAME = ADMIN_USERNAME;
+	public static final String TEST_PASSWORD = ADMIN_PASSWORD;
+	 
+	public static final String GC_TEST = "https://gc-test.youtestme.com/";
+	public static final String TEST_1 = "http://192.168.1.8:9001/";
+	public static final String TEST_2 = "http://192.168.1.8:9002/";
+	public static final String TEST_3 = "http://192.168.1.8:9003/";
+	public static final String TEST_4 = "http://192.168.1.8:9004/";
+	public static final String TEST_5 = "http://192.168.1.8:9005/";
+	public static final String TEST_6 = "http://192.168.1.8:9006/";
+	public static final String TEST_7 = "http://192.168.1.8:9007/";
+	public static final String TEST_8 = "http://192.168.1.8:9008/";
+	public static final String TEST_9 = "http://192.168.1.8:9012/";
+	public static final String TEST_10 = "http://192.168.1.8:9010/";
+	public static final String TEST_11 = "http://192.168.1.8:9011/"; 
+	public static final String TEST_12 = "http://192.168.1.163:9001/";
+	public static final String TEST_13 = "https://gc-test.youtestme.com/";
+	public static final String TEST_14 = "https://gc-official.youtestme.com/";
+	
+	public static final String DEMO_1 = "http://home.youtestme.com:55246/ytmdemo1/";
+	public static final String DEMO_3 = "http://home.youtestme.com:55246/ytmdemo3/";
+	public static final String MEGA_6 = "http://mega6.youtestme.com/";
+	public static final String DEMO_33 = "http://192.168.10.106:9006/";
+	public static final String YOUTESTME_APP = "http://192.168.2.102:9002/";
+	public static final String DEMO_1_NEW = "http://cl2020-practice.youtestme.com/";
+	public static final String DEMO_2_NEW = "http://classroom.youtestme.com/";
+	public static final String DEMO_3_NEW = "http://cl2020-milica.youtestme.com/";
+	public static final String DEMO_4_NEW = "http://cl2020-ldanilo.youtestme.com/";
+	public static String SUITE_TEST_URL = STC.setupUrl();
+	
+	
+	public static String testUrl = TEST_13; // desired base url
+	
+ // private static BrowserType browserType = BrowserType.CHROME;
+	
+   private static BrowserType browserType = BrowserType.CHROME_HEADLESS;
+
+	private static String local = null; // desired language
+
+	public static final Integer WAIT_FOR_ELEMENT_TIME_OUT = 45;
+	public static final long SHORT_SLEEP = 200; // short sleep of 200 ms.
+
+	public static final String TEST_USER = "admin";
+	
+	public static final String TEST_EMAIL = "noreply@youtestme.com";
+
+	/*public static String profiles() {
+		return testUrl;
+	}*/ 
+
+	public static String getTestUrl() {
+		return testUrl;
+	}
+	
+	public static void setTestUrl(String testUrl) {
+		TestConfig.testUrl = testUrl;
+	}
+
+	public static BrowserType getBrowserType() {
+		return TestConfig.browserType;
+	}
+
+	public static void setBrowserType(BrowserType browserType) {
+		TestConfig.browserType = browserType;
+	}
+
+	public static String getLocal() {
+		return local;
+	}
+
+	public static void setLocal(String local) {
+		TestConfig.local = local;
+	}
+	
+	public static String getTestUser() {
+		return TEST_USERNAME;
+	}
+
+	public static String getTestPassword() {
+		return TEST_PASSWORD;
+	}
+
+
+}

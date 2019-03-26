@@ -1,0 +1,50 @@
+package prevoznoSredstvo;
+
+//kreirati paket prevozno sredstvo, kreirati klasu vozilo
+//koja poseduje broj mesta za prevoz putnika INT
+//vozilo takodje poseduje gorivo DOUBLE;
+//kapacitet prevoza putnika se zadaje prilikom kreiranja vozila
+//i nemoguce ga je promeniti GET
+//automobil je vozilo koje sadrzi odredjen broj putnika,
+//registarski broj STRING, poseduje snagu DOUBLE,
+//avion je vozilo koje sadrzi putnike
+//i koje ima jedinstveni serijski broj String, marku STRING,
+//kao i klasu putnika koju
+//koje prevozi STRING
+//putnik ima ime i prezime STRING,
+//i jedinstveni id koji se automatski dodeduljuje
+//vozilo isto ima jedinstveni id koji se automatski dodeljuje
+//u vozilo je moguce postaviti i ukloniti putnika na neko od mesta
+//povratna vrednost je indikator da li je putnik uspesno uklonjen ili nije BOOLEAN
+//VOZILO(ID:<GORIVO>:BRPUTNIKA{SVIPUTNICI})
+//AUTOMOBIL(ID:REGBROJ:<GORIVO>:BRPUTNIKA{SVIPUTNICI})
+//AVION(ID:SERBROJ:<GORIVO>:BRPUTNIKA{SVIPUTNICI})
+//za putnika: [ID:IME_PREZIME]
+
+public class Putnik {
+private String imeP;
+public static int uidP = 0;
+private int idP = 0;
+
+public Putnik(String imeP) {
+	this.idP = ++uidP;
+	this.imeP = imeP;
+}
+
+public String getImeP() {
+	return imeP;
+}
+
+public void setImeP(String imeP) {
+	this.imeP = imeP;
+}
+
+public String toString() {
+
+	StringBuilder sb = new StringBuilder("");
+	sb.append("[");
+	sb.append(this.idP).append(":");
+	sb.append(this.imeP).append("]");
+	return sb.toString();
+}
+}

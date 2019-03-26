@@ -1,0 +1,28 @@
+package glavni;
+
+public class Pocetna {
+
+	public static void main(String[] args) {
+/*
+		int a = 5, b = 10, c ;
+		double ab, pi = 3.14 ;
+		boolean danasjesuncandan = false;
+		char slovoS = 's';
+		String rec = "HELLO World !";
+		c = a + b;
+		
+		
+	System.out.print(rec);*/
+		
+		System.out.print("Hello World!\n");
+		int a, b, c;
+		a=13;
+		b=18;
+		c=a/b;
+		
+		System.out.println(c);
+	
+		System.out.println(a*b);
+	}
+
+}

@@ -1,0 +1,62 @@
+package vezbanjeZaTest;
+
+
+/* Vozilo(Apstraktna klasa) poseduje jedinstveni identifikator koji se dodeljuje automatski prilikom kreiranja.
+Vozilo poseduje prosecnu potrosnju koja se dodeljuje prilikom kreiranja i ne moze da se promeni ali se moze dohvatiti.
+Vozilo se stvara bez goriva, koje se posle moze dodati, oduzeti i dohvatiti.
+Moguce je da vozilo predje zadat broj kilometara.
+Vozilo poseduje jednoslovnu oznaku koja moze da se dohvati.
+Moze da se ispise u formatu OZNAKA[ID{PROSECNA POTROSNJA}:TRENUTNO_GORIVO]
+ 
+
+Automobil je vozilo koje poseduje i registracioni broj. 
+Automobil kada predje zadat broj kilometara ono potrosi goriva jednako formuli km*prosecna_potrosnja. 
+Takodje je potrebno vratiti informaciju koliko je goriva potroseno. 
+Auto ne moze da predje zadat broj kilometara ako nema dovoljno goriva za to. 
+Jednoslovna oznaka je A. Moze da se ispise u formatu VOZILO:REG_BROJ
+
+Kamion je vozilo koje poseduje i serijski broj. 
+Kamion kada predje zadat broj kilometara ono potrosi goriva jednako formuli 4*km*prosecna_potrosnja.
+Takodje je potrebno vratiti informaciju koliko je goriva potroseno.
+Kamion ne moze da predje zadat broj kilometara ako nema dovoljno goriva za to.
+Jednoslovna oznaka je K. Moze da se ispise u formatu VOZILO:SER_BROJ
+
+Napisati glavni program koji testira rad ovih klasa. */
+
+public class MainVozilo {
+
+	public static void main(String[] args) {
+	
+Vozilo v1 = new Automobil(0.08,"BG 543DS",'A');
+Vozilo v2 = new Kamion(0.08,65,'K');
+System.out.println(v1);
+System.out.println(v2);
+System.out.println();
+v1.addGorivo(50);
+v2.addGorivo(400);
+System.out.println(v1);
+System.out.println(v2);
+System.out.println();
+v1.predjiPut(370);
+v2.predjiPut(590);
+
+System.out.println();
+System.out.println(v1);
+System.out.println(v2);
+
+Automobil a1 = new Automobil(0.08,"BA 000DS",'A');
+Kamion k1 = new Kamion(0.08,109, 'K');
+
+System.out.println();
+System.out.println(a1);
+System.out.println(k1);
+
+a1.addGorivo(50);
+k1.addGorivo(400);
+
+System.out.println();
+System.out.println(a1);
+System.out.println(k1);
+	}
+
+}

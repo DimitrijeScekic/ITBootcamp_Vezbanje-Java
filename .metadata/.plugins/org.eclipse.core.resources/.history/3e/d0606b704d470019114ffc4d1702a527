@@ -1,0 +1,11 @@
+package stariPaket;
+
+public class Uredjaj implements IChangeable {
+
+	@Override
+	public void changeState() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

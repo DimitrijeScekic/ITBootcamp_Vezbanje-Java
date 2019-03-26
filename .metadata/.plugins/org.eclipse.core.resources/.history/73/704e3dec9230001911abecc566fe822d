@@ -1,0 +1,17 @@
+package glavni;
+
+public class Krug {
+
+	public static void main(String[] args) {
+		double r, pi, povrsina ;
+		r=4;
+		pi=3.14;
+		povrsina = r*r*pi;
+				
+				System.out.println(povrsina);
+		
+		// TODO Auto-generated method stub
+
+	}
+
+}

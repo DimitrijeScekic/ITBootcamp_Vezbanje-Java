@@ -1,0 +1,240 @@
+package com.mallocinc.ytm.testing.core.pages;
+
+import org.openqa.selenium.By;
+
+/**
+ * 
+ * @author Danilo
+ * 
+ */
+public class ProfilesPage {
+
+	// New user
+	public static final By INPUT_NEW_USERNAME = By.id("newForm:username");
+	public static final String BASE_LANGUAGE = "newForm:language";
+	public static final By INPUT_NEW_FIRST_NAME = By.id("newForm:firstName");
+	public static final By INPUT_NEW_LAST_NAME = By.id("newForm:lastName");
+	public static final By INPUT_NEW_BIRTH_DATE = By.id("newForm:birth_input");
+	public static final String BASE_RADIO_GENDER_ID = "newForm:gen";
+	public static final By INPUT_SEMESTER = By.id("newForm:semester_input");
+	public static final By INPUT_YEAR = By.id("newForm:year_input");
+	public static final By INPUT_PASSWORD_EXPIRE = By.id("newForm:passex_input");
+	public static final String BASE_SELECT_ROLES = "newForm:roles";
+	public static final String BASE_SELECT_STATUS = "newForm:status";
+	public static final By INPUT_EMAIL = By.id("newForm:email");
+	public static final By INPUT_DAYTIME_PHONE = By.id("newForm:dayPhone");
+	public static final By TYPE_ADDRESS = By.id("newForm:area");
+	public static final By CREATE_USER_BUTTON = By.id("newForm:createBtn");
+	public static final By BUTTON_NEW_USER_PANEL = By.id("butForm:newUserBtn");
+
+	// SHOW USERS
+	public static final By BUTTON_SHOW_USERS = By.xpath("//div[@id='butForm:showUsersBtn']/span");
+	public static final By SHOW_DELETED_USERS = By.xpath("//div[@id='usersForm:showDeletedUsers']/div[2]/span");
+	public static final By CHECK_USER = By.xpath("//tbody[@id='usersForm:usersTable_data']/tr/td/div/div[2]");
+	public static final By BUTTON_SET_STATUS_TO = By.id("usersForm:usersTable:setStatusTo_button");
+	public static final By SET_STATUS_TO_ACTIVE = By
+			.xpath("//div[@id='usersForm:usersTable:setStatusTo_menu']/ul/li/a/span");
+	
+	public static final By SET_STATUS_TO_LOCKED = By
+		.xpath("//div[@id='usersForm:usersTable:setStatusTo_menu']/ul/li[2]/a/span");
+	public static final By SET_STATUS_TO_SUSPENDED = By
+				.xpath("//div[@id='usersForm:usersTable:setStatusTo_menu']/ul/li[3]/a/span");
+	public static final By SET_STATUS_TO_DELETED = By
+				.xpath("//div[@id='usersForm:usersTable:setStatusTo_menu']/ul/li[4]/a/span");
+	
+	
+	// REGISTRATION
+	
+	public static final By BUTTON_REGISTRATION_REQUEST = By.id("butForm:requestsBtn");
+	public static final By CHECK_REQUEST_USER = By.xpath("//tbody[@id='pendingForm:pendingTable_data']/tr/td/div/div[2]");
+	public static final By ACTION = By.id("pendingForm:pendingTable:j_idt350_button");
+	public static final By SET_TO_APPROVE = By
+			.xpath("//div[@id='pendingForm:pendingTable:j_idt350_menu']/ul/li[1]/a/span");
+	public static final By SET_TO_DECLINE = By
+			.xpath("//div[@id='pendingForm:pendingTable:j_idt350_menu']/ul/li[2]/a/span");    // instanca 9005,9011
+                      //*[@id="pendingForm:pendingTable:j_idt348_menu"]/ul/li[2]/a/span       // instanca 9006
+	
+	
+	
+	// ROLES
+	public static final By OPEN_ROLES = By.id("butForm:showRolesBtn");
+	public static final By BUTTON_NEW_ROLE = By.id("titleForm:newRoleBtn");
+	public static final By INPUT_ROLE_NAME = By.id("rolesForm:roleName");
+	public static final String CHOOSE_ROLE_CLICK = "rolesForm:selectRole";
+	public static final By ROLE_CODE = By.id("rolesForm:roleCodeBtn");
+	public static final By ROLE_DESCRIPTION = By.id("rolesForm:description");
+	public static final By BUTTON_EXPORT_USERS = By.id("usersForm:usersTable:exportUsersPDF");
+	public static final By SELECT_NUMBER_OF_RESULTS = By.xpath("//select[@value='10']");	
+	public static final By BUTTON_ROLE_SAVE = By.id("rolesForm:roleSave");
+
+	/** Permissions */
+	public static final int PERMISSION_PROFILES_GROUP = 0;
+	public static final int PERMISSION_MANAGE_A_ROLE = 1;
+	public static final int PERMISSION_GRANT_ROLES_TO_USERS = 2;
+	public static final int PERMISSION_ACCESS_THE_PROFILES_PAGE = 3;
+	public static final int PERMISSION_VIEW_A_LIST_OF_ALL_USERS = 4;
+	public static final int PERMISSION_MANAGE_REGISTER_REQUESTS = 5;
+	public static final int PERMISSION_EXPORT_A_USERS_LIST = 6;
+	public static final int PERMISSION_VIEW_DELETED_USERS = 7;
+	public static final int PERMISSION_MANAGE_A_USER_STATUS = 8;
+	public static final int PERMISSION_CREATE_NEW_USER = 9;
+
+	/** User Permissions **/
+	public static final int PERMISSION_USER_GROUP = 1;
+
+	public static final int PERMISSION_VIEW_OTHER_USERS_PERSONAL_INFO = 0;
+	public static final int PERMISSION_CHANGE_YOUR_PERSONAL_INFO = 1;
+	public static final int PERMISSION_CHANGE_OTHER_USERS_PERSONAL_INFO = 2;
+	public static final int PERMISSION_CHANGE_YOUR_PASSWORD = 3;
+	public static final int PERMISSION_CHANGE_OTHER_USERS_PASSWORD = 4;
+
+	/** Courses Permissions **/
+	public static final int PERMISSION_COURSES_GROUP = 2;
+
+	public static final int PERMISSION_ACCESS_THE_COURSES_PAGE = 0;
+	public static final int PERMISSION_VIEW_DELETED_COURSES_AND_CLASSES = 1;
+	public static final int PERMISSION_VIEW_ALL_COURSES_AND_CLASSES = 2;
+	public static final int PERMISSION_CREATE_COURSES_AND_CLASSES = 3;
+	public static final int PERMISSION_MANAGE_ANY_COURSE_OR_CLASS = 4;
+
+	/** Courses Permissions **/
+	public static final int PERMISSION_POOLS_GROUP = 3;
+
+	public static final int PERMISSION_ACCESS_THE_POOLS_PAGE = 0;
+	public static final int PERMISSINO_CREATE_A_POOL = 1;
+	public static final int PERMISSION_MANAGA_ANY_POOL = 2;
+	
+	
+
+	/** Quizzes Permissions **/
+	public static final int PERMISSION_QUIZZES_GROUP = 4;
+
+	public static final int PERMISSION_ACCESS_THE_QUIZZES_PAGE = 0;
+	public static final int PERMISSION_CREATE_A_QUIZ = 1;
+	public static final int PERMISSION_CREATE_AN_OFFICIAL_QUIZ = 2;
+	public static final int PERMISSION_ASSIGN_QUIZ_TO_OTHER_USERS = 3;
+	public static final int PERMISSION_MANAGE_ANY_QUIZ = 4;
+	public static final int PERMISSION_VIEW_BASIC_INFO_ABOUT_SENT_QUIZZES = 5;
+	public static final int PERMISSION_VIEW_THE_DELETED_QUIZZES = 6;
+	public static final int PERMISSION_CREATE_A_QUIZ_TEMPLATE = 7;
+	public static final int PERMISSION_SET_A_QUIZ_TEMPLATE_TO_BE_PUBLIC = 8;
+	public static final int PERMISSION_MANAGE_ANY_QUIZ_TEMPLATE = 9;
+	public static final int PERMISSION_ACCESS_THE_REPORTS_PAGE = 10;
+	public static final int PERMISSION_MANAGE_ANY_REPORT = 11;
+	public static final int PERMISSION_VIEW_A_BASIC_REPORT_OF_ANY_QUIZ = 12;
+	public static final int PERMISSION_VIEW_A_COMPLETE_REPORT_OF_ANY_QUIZ = 13;
+
+	/** Grading Permissions **/
+	public static final int PERMISSION_GRADING_GROUP = 5;
+
+	public static final int PERMISSION_ACCESS_THE_GRADING_PAGE = 0;
+	public static final int PERMISSION_CREATE_A_GRADING_SYSTEM = 1;
+	public static final int PERMISSION_CREATE_A_PUBLIC_GRADING_SYSTEM = 2;
+	public static final int PERMISSION_MANAGE_ANY_GRADYNG_SYSTEM = 3;
+
+	/** Category Permissions **/
+	public static final int PERMISSIONS_CATEGORY_GROUP = 6;
+	public static final int PERMISSION_CREATE_A_QUIZ_CATEGORY = 0;
+	public static final int PERMISSION_MANAGE_ANY_QUIZ_CATEGORY = 1;
+	
+	/** Group Manage **/
+	
+	public static final By ROOT_NODE_SELECT = By.xpath("//ul[@id='mainMenu']/li/ul/li[2]/a/span");
+	public static final By BUTTON_CREATE = By.id("treeButForm:newSubCourseTabTop");
+	public static final By INPUT_NEW_COURSE_NAME = By.id("newCourseForm:newCourseName");
+	public static final By INPUT_NEW_COURSE_DESCRIPTION = By.id("newCourseForm:newCourseDescription");
+	public static final By BUTTON_SAVE = By.id("newCourseForm:saveNewCourse");
+	public static final By BUTTON_CANCEL = By.id("newCourseForm:cancelNewCourseBtn");
+	public static final By SELECT_GROUP = By.xpath("//li[@id='treeForm:tree:0_0']/span/span[2]");
+	//*[@id="treeForm:tree:0_0"]/span/span[3]/span
+	//*[@id="treeForm:tree:0_0"]/span/span[3]/span
+	
+	//*[@id="treeForm:tree:0_0"]/span/span[3]
+	//*[@id="treeForm:tree:0_0"]/span/span[3]
+	public static final By SEARCH_CANDIDATE =By.id("membersForm:candidatesId:j_idt406:filter");
+	public static final By BUTTON_CANDIDATES =By.id("butForm:viewMembersTab");
+	public static final By CHECK_CANDIDATE = By.xpath("//tbody[@id='membersForm:candidatesId_data']/tr/td[1]/div/div[2]/span");
+	public static final By REMOVE_SELECTED = By.id("membersForm:membersource:removeMembersCourseBtn");
+	public static final By CONFIRM_BUTTON = By.id("confirmDialog:yesBtn");
+	
+	
+	/** New Subscriber Create **/
+
+	public static final By NODE_SELECT = By.xpath("//ul[@id='mainMenu']/li/ul/li[4]/a/span");
+	//public static final By NEW_SUBSCRIPTION_BUTTON = By.id("subscribeForm:allSubscribeTable:j_idt280");
+	public static final By INPUT_NEW_SUBSCRIBER_NAME = By.id("subscribeForm:titleSub");
+    public static final By INPUT_NEW_SUBSCRIBER_DESCRIPTION = By.id("subscribeForm:descSub");
+    public static final By INPUT_NEW_SUBSCRIBER_MAIL_LIST = By.id("subscribeForm:subscribeList");
+    public static final By BUTTON_SAVE_NEW_SUBSCRIBER = By.id("subscribeForm:saveNewSub");
+
+	
+	
+	
+	
+
+
+	// *** BUTTONS FOR SMATSA *** \\
+
+	public final static By profiles_menu = By.id("profiles");
+
+	public final static By create_new_user_button = By.id("butForm:newUserBtn");
+
+	public final static By new_user_username = By.id("newForm:username");
+
+	public final static By new_user_email = By.id("newForm:email");
+
+	public final static By new_user_first_name = By.id("newForm:firstName");
+
+	public final static By new_user_last_name = By.id("newForm:lastName");
+
+	public final static By new_user_address = By.id("newForm:area");
+
+	public final static By confirm_create_new_user_button = By.id("newForm:createBtn");
+	
+	public final static By notification_user_created = By.cssSelector("div.ui-growl-message > p");
+
+	public final static By show_roles = By.id("butForm:showRolesBtn");
+
+	public final static By new_roles = By.id("rolesForm:newRoleBtn");
+
+	public final static By new_roles_name_field = By.id("rolesForm:roleName");
+
+	public final static By new_roles_description_field = By.id("rolesForm:description");
+
+	public final static By new_roles_code_field = By.id("rolesForm:roleCodeBtn");
+
+	public final static By action_button = By
+			.xpath("html/body/div[4]/div/div/form[5]/div/div[2]/table/tbody/tr[4]/td/div[2]/div/span/button");
+
+	public final static By create_new_role = By.id("rolesForm:roleSave");
+
+	public final static By rolesForm = By.id("rolesForm");
+
+	public final static By subscribers_tab = By.xpath("//div[@id='butForm:j_idt182']/span[2]");
+
+	public final static By create_new_button = By.id("subscribeForm:allSubscribeTable:j_idt394");
+
+	public final static By subscribers_title_field = By.id("subscribeForm:titleSub");
+
+	public final static By subscribers_list_field = By.id("subscribeForm:subscribeList");
+
+	public final static By save_subscribers_button = By.id("subscribeForm:saveNewSub");
+
+	public final static By click_on_test_1 = By.id("knobForm:progresses:0:previewLessonBtn");
+	
+	public final static By click_on_test_2 = By.id("knobForm:progresses:1:previewLessonBtn");
+	
+	public final static By click_on_test_3 = By.id("knobForm:progresses:2:previewLessonBtn");
+
+	public final static By click_on_test_TAB = By.xpath("//div[@id='butForm:viewItemQuizBtn']/span[2]");
+
+	public final static By start_test_button = By.id("liForm:j_idt257");
+
+	public final static By next_question_button = By.id("takeQuestionForm:nextBut");
+
+	public final static By finish_test_button = By.id("j_idt84:finishQuizButtonSummary");
+
+	public final static By confirm_finish_test = By.id("confirmDialog:yesBtn");
+
+	
+}

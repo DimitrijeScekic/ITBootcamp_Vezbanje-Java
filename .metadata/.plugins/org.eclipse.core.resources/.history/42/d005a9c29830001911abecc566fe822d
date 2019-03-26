@@ -1,0 +1,34 @@
+package glavni;
+
+import java.util.Scanner;
+
+public class Krug {
+
+	public static void main(String[] args) {
+
+		Scanner sc = new Scanner(System.in);
+
+		/*
+		 * double r, pi, povrsina;
+		 * 
+		 * System.out.println("Unesite poluprecnik :"); r = sc.nextDouble();
+		 * 
+		 * pi = 3.14; povrsina = r * r * pi;
+		 * 
+		 * System.out.println("Povrsina kruga je = " + povrsina);
+		 */
+
+		double ab, obim;
+		System.out.println("Unesite duzinu stranice kvadrata :");
+		ab = sc.nextDouble();
+		if(ab>0) {
+		obim = 4 * ab;
+		System.out.println("Obim kvadrata je = " + obim);
+		}
+		else {
+			System.out.println("Morate uneti pozitivan broj veci od nule ");
+		}		
+
+	}
+
+}

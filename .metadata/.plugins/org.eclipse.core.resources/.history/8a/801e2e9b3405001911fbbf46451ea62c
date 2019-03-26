@@ -1,0 +1,846 @@
+package com.mallocinc.ytm.testing.core;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotVisibleException;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.mallocinc.ytm.testing.config.TestConfig;
+import com.mallocinc.ytm.testing.util.UtilRandomizer;
+
+/**
+ * This is a wrapper class for web driver. If create test by it is good to use
+ * wrapped driver's methods, because they are shorter and we probably won't
+ * forget anything.
+ * 
+ * @author Danilo
+ * 
+ */
+public class WebDriverExtended implements WebDriver {
+
+	Logger logger = Logger.getLogger(WebDriverExtended.class.getName());
+	public WebDriver driver ;
+	JavascriptExecutor je = (JavascriptExecutor) driver;
+	//private int brokenLinks = 0;
+	
+	public WebDriverExtended() {
+		this.driver = WebDriverProvider.getInstance(TestConfig.getBrowserType());		
+	}
+
+	public void openPage(String value) {
+		driver.get(value);
+	}
+
+     
+	/**
+	 * Wrapped method for typing into input text field.
+	 * 
+	 * @param element
+	 * @param value
+	 * @throws InterruptedException
+	 * @throws Exception
+	 */
+
+	/*
+	 * Stefan Lazareviæ - Ovo nisu idealne metode, ali služe da skroluje taèno
+	 * ispod elementa koji se uvede kao ulazni parametar.
+	 */
+	public void scrollUnderElement(By element) throws InterruptedException {
+		System.out.println("Scrolling ...");
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(element));			
+	}
+
+	public void scrollUnderElementByXpath(String elementPath) throws InterruptedException { 
+		WebElement element = driver.findElement(By.xpath(elementPath));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
+		Thread.sleep(2000);
+	}
+
+	public void scrollWithDownKey(String panelPath, int times, boolean click) throws Exception {
+		System.out.println("Scroling down with down key " + times + " times.");
+		if (click == true) {
+			click(By.xpath(panelPath));
+			Thread.sleep(2000);
+			click(By.xpath(panelPath));
+		}
+		int i = 0;
+		while (i < times) {
+			driver.findElement(By.xpath(panelPath)).sendKeys(Keys.ARROW_DOWN);
+			Thread.sleep(1000);
+			i++;
+		}
+	}
+
+	public void scrollWithUpKey(String panelPath, int times, boolean click) throws Exception {
+		System.out.println("Scroling down with down key " + times + " times.");
+		if (click == true) {
+			click(By.xpath(panelPath));
+			Thread.sleep(2000);
+			click(By.xpath(panelPath));
+		}
+		int i = 0;
+		while (i < times) {
+			driver.findElement(By.xpath(panelPath)).sendKeys(Keys.ARROW_UP);
+			Thread.sleep(1000);
+			i++;
+		}
+	}
+
+	public void scrollWithTab(String panelPath, int times, boolean click) throws Exception {
+		if (click == true) {
+			click(By.id(panelPath));
+		}
+		int i = 0;
+		while (i < times) {
+			driver.findElement(By.xpath(panelPath)).sendKeys(Keys.TAB);
+			Thread.sleep(1000);
+			i++;
+		}
+	}
+
+	public void sendTab(String panelPath) {
+		driver.findElement(By.xpath(panelPath)).sendKeys(Keys.TAB);
+	}
+
+	public void type(By element, String value) throws Exception {
+		if (isElementPresent(element)) {
+			// waitForElementPresent(element);
+			try {
+				//Thread.sleep(1000);
+				//driver.findElement(element).clear(); // input field should be
+														// cleared
+				System.out.println("Typing: " + value);
+				driver.findElement(element).sendKeys(value); // input text
+				// Thread.sleep(TestConfig.SHORT_SLEEP);
+				Thread.sleep(500);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println("---Element " + element + " is not Visible---");
+			System.out.println("Waiting for exception stacktrace...");
+			System.out.println("Aborting the class testing...");
+			driver.quit();
+		}
+	}
+
+
+	public void type2(String value) throws Exception {
+		// input field should be cleared
+		driver.findElement(By.linkText(value)); // input text
+		Thread.sleep(TestConfig.SHORT_SLEEP);
+	}
+	
+
+	/**
+	 * Wrapped method for replacing text of input To be used in cases where
+	 * clear would throw validation error
+	 * 
+	 * @param element
+	 * @param value
+	 * @throws Exception
+	 */
+
+	public void replaceText(By element, String value) throws Exception {
+		waitForElementPresent(element); // every element should be present first
+		WebElement webElement = driver.findElement(element);
+
+		if (webElement == null) {
+			throw new ElementNotFoundException(element.toString(), element.toString(), value);
+		}
+
+		// select all and replace
+		driver.findElement(element).sendKeys(Keys.chord(Keys.CONTROL, "a"), value);
+		Thread.sleep(TestConfig.SHORT_SLEEP);
+	}
+
+	public void sendEmptyKeys(By element) throws Exception {
+		waitForElementPresent(element); // every element should be present first
+		driver.findElement(element).sendKeys(""); // input text
+		Thread.sleep(TestConfig.SHORT_SLEEP);
+	}
+
+	/**
+	 * useful when field cannot stay empty never (spinners for example)
+	 * 
+	 * @param element
+	 * @param value
+	 * @throws Exception
+	 */
+	public void selectAndOverwrite(By element, String value) throws Exception {
+		waitForElementPresent(element); // every element should be present first
+		driver.findElement(element).sendKeys(Keys.chord(Keys.CONTROL, "a"), value);
+		Thread.sleep(TestConfig.SHORT_SLEEP);
+	}
+
+	/**
+	 * method for changing number of results you want to see in tables result
+	 * can be 50 and 100, 10 is default value
+	 * 
+	 * @param element
+	 * @param Results
+	 * @throws Exception
+	 */
+	public void numberOfResults(By element, String Results) throws Exception {
+		if (isElementPresent(element)) {
+			new Select(driver.findElement(element)).selectByVisibleText(Results);
+		} else {
+			System.out.println("---Element " + element + " is not Visible---");
+			System.out.println("Aborting the class testing...");
+			driver.quit();
+		}
+	}
+
+	public void click(By element) throws Exception {
+		if (isElementPresent(element)) {
+			try {
+				System.out.println("Click: " + element);
+				// waitForElementPresent(element);
+				driver.findElement(element).click();
+				Thread.sleep(TestConfig.SHORT_SLEEP);
+			} catch (Exception e) {
+				e.printStackTrace();
+				driver.quit();
+			}
+		} else {
+			System.err.println("---Element " + element + " is not Visible---");
+			System.err.println("Waiting for exception stacktrace...");
+			System.err.println("Aborting the class testing...");
+			System.out.println("----------------------------------------");
+			driver.quit();
+		}
+	}
+
+	public void waitForElementPresent(By element) throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= TestConfig.WAIT_FOR_ELEMENT_TIME_OUT) {
+				System.out.println(TestConfig.WAIT_FOR_ELEMENT_TIME_OUT + "seconds passed.");
+				throw new ElementNotVisibleException(element.toString());
+			}
+			try {
+				if (isElementPresent(element))
+					break;
+			} catch (Exception e) {
+				// Very hard to handle, throw exceptions 45 times (default wait
+				// for element time)
+				logger.info("Element has not been found.");
+				e.printStackTrace();
+				second = TestConfig.WAIT_FOR_ELEMENT_TIME_OUT;
+				Thread.sleep(1000);
+			}
+		}
+	}
+
+	public boolean isElementPresent(By element) {
+		try {
+			driver.findElement(element);
+			return true;
+		} catch (NoSuchElementException e) {
+			return false;
+		}
+	}
+	
+	public WebDriver getDriver() {
+		return driver;
+	}
+
+	public void setDriver(WebDriver driver) {
+		this.driver = driver;
+	}
+
+	private By createSelectOneMenyOptionBy(String selectOneMenuId, int optionNum) {
+		return /*
+				 * By.xpath("//div[@id='" + selectOneMenuId + "_panel" +
+				 * "']/div/ul/li[" + optionNum + "]");
+				 */
+		By.xpath("//div[@id='" + selectOneMenuId + "_panel" + "']/div/ul/li"
+				+ (optionNum == 1 ? "" : ("[" + optionNum + "]")));
+	}
+
+	public By createSelectRandomDropBoxOptionBy(String selectOneMenuId, int optionNum) {
+		return /*
+				 * By.xpath("//div[@id='" + selectOneMenuId + "_panel" +
+				 * "']/div/ul/li[" + optionNum + "]");
+				 */
+		By.xpath("//div[@id='" + selectOneMenuId + "']/div/ul/li" + (optionNum == 1 ? "" : ("[" + optionNum + "]")));
+	}
+
+	private By createSelectRandomMenuOptionBy(String selectOneMenuId, int optionNum) {
+		return /*
+				 * By.xpath("//a[@id='lessonsForm:lessonItems:0:" +
+				 * selectOneMenuId + "_panel" + "']/span" + optionNum + "]");
+				 */
+		By.xpath("//div[@id='" + selectOneMenuId + "']/ul/li"
+				+ (optionNum == 1 ? "" : ("[" + optionNum + "]" + "/a/span")));
+	}
+
+	public void selectFromOneMenu() throws Exception {
+		click(By.id("regForm:roles_label"));
+		Thread.sleep(1000);
+		click(By.id("regForm:roles_2")); 
+	}
+	
+
+	public void selectFromOneMenuNoLabel(String selectOneMenuId, int optionNum) throws Exception {
+		click(createSelectOneMenyOptionBy(selectOneMenuId, optionNum));
+	}
+
+	// Stefan Lazarevic-----------------------------
+	
+	public void selectUserFromTable(String tableData, int columnNum) throws Exception {
+		String userSelection = "//tBody[@id='" + tableData + "']/tr[" + columnNum + "]/td/div/div[2]";
+		click(By.xpath(userSelection));
+	}
+	
+	public void setUserStats(String statusButton, int statsId) throws Exception {
+		click(By.id(statusButton));
+		Thread.sleep(2000);
+		String userSelection = "//div[@id='usersForm:usersTable:setStatusTo_menu']/ul/li[" + statsId + "]/a/span";
+		click(By.xpath(userSelection));
+	}
+
+	public void selectLitheratureType(By litheratureMenuButton, int litheratureId) throws Exception {
+		click(litheratureMenuButton);
+	}
+
+	// new methods for class indexpagetesthelper
+	
+	/*public void selectIndexSearchType(int type) throws Exception {
+		click(By.id("globalSrcForm:selectSearchMode_button")); 		
+		if (type != 1) {
+			click(By.xpath("//div[@id='globalSrcForm:selectSearchMode_menu']/ul/li[" + type + "]/a/span"));
+		} else
+			click(By.xpath("//div[@id='globalSrcForm:selectSearchMode_menu']/ul/li/a/span"));
+
+	}*/
+	
+	public void selectIndexSearchType(int type) throws Exception {
+		click(By.id("globalSrcForm:selectSearchMode_menuButton"));
+		
+		if (type != 1) {
+			click(By.xpath("//div[@id='globalSrcForm:selectSearchMode_menu']/ul/li[" + type + "]"));
+			
+		} else
+			click(By.xpath("//div[@id='globalSrcForm:selectSearchMode_menu']/ul/li[1]"));
+
+	}
+	
+	
+	// ---------------------------------------------
+	public void selectOneRadioFromTwo(String baseId, int optionNum) throws Exception {
+		String frameString = "//table[@id='" + baseId + "']/tbody/tr/td" + (optionNum == 0 ? "" : "[3]")
+				+ "/div/div[2]";
+		click(By.xpath(frameString));
+		click(By.id(baseId + ":" + optionNum));
+	}
+
+	public void clickOnTableButton(String tableId, int row, String buttonId) throws Exception {
+		click(By.id(tableId + ":" + row + buttonId));
+	}
+
+	public void selectOneFromSearch(String selectOneId, int optionNum) throws Exception {
+		String select = "//div[@id='" + selectOneId + "_panel']/table/tbody/tr"
+				+ (optionNum == 1 ? "" : ("[" + optionNum + "]")) + "/td";
+
+		click(By.xpath(select));
+	}
+		
+	public int getSizeFromMenusOrDropBoxes(String menuId) throws Exception {
+		if (checkIfElementExists(By.id(menuId))) {
+			WebElement webelement = driver.findElement(By.id(menuId));
+			String elements = webelement.getText();
+			String[] splittedElements = elements.split("\n");
+			int sizeOfOptions = splittedElements.length;
+			if (sizeOfOptions == 1)
+				return 0;
+			else				return sizeOfOptions;
+		}
+		return 0;
+	}
+
+	public String getStringOfAnElement(By element) {
+		WebElement givenElement = driver.findElement(element);
+		return givenElement.getText();
+	}
+
+	public String getValue(By element, String value) {
+		WebElement givenElement = driver.findElement(element);
+		return givenElement.getAttribute(value);
+	}
+
+	public boolean checkIfElementExists(By element) {
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		Boolean isPresent = driver.findElements(element).size() > 0;
+		driver.manage().timeouts().implicitlyWait(TestConfig.WAIT_FOR_ELEMENT_TIME_OUT, TimeUnit.SECONDS);
+		if (isPresent) {
+			return true;
+		} else
+			return false;
+	}
+	
+	public boolean isVisible(By selector) {
+	    WebElement element = driver.findElement(selector);
+
+	    if (element == null) {
+	        return false;
+	    }
+	    return element.isDisplayed();
+	}
+	
+	
+
+	
+	/**
+	 * The following part is required for randomized tests
+	 */
+
+	public void selectOneItemFromDropBox(String selectHiddenMenuId, String selectMenuId) throws Exception {
+		WebElement webelement = driver.findElement(By.id(selectHiddenMenuId));
+		String elements = webelement.getText();
+
+		String[] splittedElements = elements.split("\n");
+		int sizeOfOptions = splittedElements.length;
+		System.out.println(sizeOfOptions);
+		int randomizer = UtilRandomizer.randInt(1, sizeOfOptions);
+		if (sizeOfOptions > 1) {
+			if (randomizer == 1)
+				randomizer++;
+		}
+		click(createSelectRandomDropBoxOptionBy(selectHiddenMenuId, randomizer));
+	}
+
+	public void selectOneItemFromMenu(String selectHiddenMenuId, String selectMenuId) throws Exception {
+		WebElement webelement = driver.findElement(By.id(selectHiddenMenuId));
+		String elements = webelement.getText();
+
+		String[] splittedElements = elements.split("\n");
+		int sizeOfOptions = splittedElements.length;
+		System.out.println(sizeOfOptions);
+		if (sizeOfOptions == 1) {
+			selectOneItemFromMenu(selectHiddenMenuId, selectMenuId);
+			return;
+		}
+		int randomizer = UtilRandomizer.randInt(1, sizeOfOptions);
+		if (sizeOfOptions > 1) {
+			if (randomizer == 1)
+				randomizer++;
+		}
+		click(createSelectRandomMenuOptionBy(selectHiddenMenuId, randomizer));
+	}
+
+	public int selectOneItemFromMenuUsingPredifinedValues(String selectHiddenMenuId, String selectMenuId,
+			Map<Integer, Integer> values) throws Exception {
+		WebElement webelement = driver.findElement(By.id(selectHiddenMenuId));
+		String elements = webelement.getText();
+
+		String[] splittedElements = elements.split("\n");
+		int sizeOfOptions = splittedElements.length;
+		System.out.println(sizeOfOptions);
+		if (sizeOfOptions == 1) {
+			selectOneItemFromMenu(selectHiddenMenuId, selectMenuId);
+			return 0;
+		}
+		int randomNumber = UtilRandomizer.randIntFromMap(values);
+		click(createSelectRandomMenuOptionBy(selectHiddenMenuId, randomNumber));
+		return randomNumber;
+	}
+
+	public String getStringValueFromDropBox(String selectHiddenMenuId, String selectMenuId) throws Exception {
+		WebElement webelement = driver.findElement(By.id(selectHiddenMenuId));
+		String elements = webelement.getText();
+
+		String[] splittedElements = elements.split("\n");
+		int sizeOfOptions = splittedElements.length;
+		if (sizeOfOptions == 1) {
+			return "";
+		}
+		int randomizer = 0;
+		System.out.println(sizeOfOptions);
+		if (sizeOfOptions > 1) {
+			randomizer = UtilRandomizer.randInt(2, sizeOfOptions);
+		}
+
+		Boolean isPresent = driver.findElements(By.id(selectMenuId)).size() > 0;
+		String value = "";
+		if (isPresent) {
+			click(createSelectRandomDropBoxOptionBy(selectHiddenMenuId, randomizer));
+			Thread.sleep(1000);
+			value = driver.findElement(By.id(selectMenuId + "_label")).getText();
+		}
+		return value;
+	}
+
+	public String getStringValueFromMenu(String selectHiddenMenuId, String selectMenuId) throws Exception {
+		WebElement webelement = driver.findElement(By.id(selectHiddenMenuId));
+		String elements = webelement.getText();
+		String[] splittedElements = elements.split("\n");
+		int sizeOfOptions = splittedElements.length;
+		if (sizeOfOptions == 1) {
+			return "";
+		}
+		System.out.println(sizeOfOptions);
+		int randomizer = UtilRandomizer.randInt(1, sizeOfOptions);
+
+		Boolean isPresent = driver.findElements(By.id(selectMenuId)).size() > 0;
+		String value = "";
+		if (isPresent) {
+			WebElement elementForString = driver
+					.findElement(createSelectRandomMenuOptionBy(selectHiddenMenuId, randomizer));
+			value = elementForString.getText();
+			click(createSelectRandomMenuOptionBy(selectHiddenMenuId, randomizer));
+		}
+		return value;
+	}
+
+	
+	
+	 /*public WebDriverExtended(BrowserType browser) {
+		switch (browser) {
+		case FIREFOX:
+			System.setProperty("webdriver.firefox.marionette", "Driver/ffdriver.exe");
+			driver = new FirefoxDriver();
+			break;
+
+		case CHROME:
+			System.setProperty("webdriver.chrome.driver", "chromedriver_win32/chromedriver.exe");
+			driver = new ChromeDriver();
+			break;
+
+		default:
+			System.err.println("JSL INFO: BROWSER \"" + browser + "\" IS NOT SUPPORTED.");
+			System.exit(0);
+			break;
+		}
+		
+		je = (JavascriptExecutor) driver;
+		driver.manage().timeouts().pageLoadTimeout(45, TimeUnit.SECONDS);
+		driver.manage().timeouts().setScriptTimeout(45, TimeUnit.SECONDS);
+		System.err.println("\nJSL INFO: DRIVER FOR BROWSER " + browser + " IS SUCCESSFULLY CONFIGURED.");
+		System.err.println("JSL INFO: Selenium begin test at: " + this.getCurrentTime());
+	}*/
+
+
+	// **** From here start new METHODS **********
+
+	// MOUSE ACTIONS
+	// *********************************************************************
+
+	public WebDriverExtended click3(By element) {
+		clickableElement(element).click();
+		return this;
+	}
+
+	public WebDriverExtended scrollDown(int pixels) {
+		je.executeScript("scroll(0," + pixels + ");");
+		return this;
+	}
+	
+	public void zoomInZoomOut(String value){
+		 je.executeScript("document.body.style.zoom='" + value +"'");
+		 }
+	
+	public WebDriverExtended scrollIntoView(By element) {
+		System.out.println("Scrolling");
+		je.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(element));
+		System.out.println("Scrolled");
+		return this;
+	}
+
+	public WebElement clickableElement(By element) {
+		return new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(element));
+	}
+
+	@SuppressWarnings("unused")
+	public WebElement visibleElement(By element) {
+		return new WebDriverWait(driver, 20).until(ExpectedConditions.presenceOfElementLocated(element));
+	}
+	//**** End of MOUSE ACTIONS
+	
+	
+	
+	/** Return current local time. */
+	private String getCurrentTime() {
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		Date date = new Date();
+		return dateFormat.format(date);
+	}
+
+	/**
+	 * Generating random hash code
+	 * 
+	 * @author Stefan Lazarevic
+	 * @since <i>Version 1.0</i>
+	 * 
+	 */
+	public String generateHash() {
+		return Long.toHexString(Double.doubleToLongBits(Math.random()));
+	}
+
+	
+	/*
+	 * Generating random string whit uper case code
+	 * 
+	 * @author Nikola Trajkovic
+	 */
+	public String generateUppercaseString() {
+		int length = 8;
+		String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+		String str = new Random().ints(length, 0, chars.length()).mapToObj(i -> "" + chars.charAt(i))
+				.collect(Collectors.joining());
+		return str;
+	}
+	
+	public String generateUppercaseStringForCode() {
+		int length = 3;
+		String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+		String str = new Random().ints(length, 0, chars.length()).mapToObj(i -> "" + chars.charAt(i))
+				.collect(Collectors.joining());
+		return str;
+	}
+	
+	public String generateString() {
+		int length = 1;
+		String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+		String str = new Random().ints(length, 0, chars.length()).mapToObj(i -> "" + chars.charAt(i))
+				.collect(Collectors.joining());
+		return str;
+	}
+	
+	/*
+	 * Generating random string whit NUMBERS
+	 * 
+	 * @author Nikola Trajkovic
+	 */
+	public String generateNumberInString() {
+		int length = 2;
+		String chars = "12345678910111213141516171819202122232425262728293031"
+				+ "333343536373839404142434445464748495051525355";
+
+		String str = new Random().ints(length, 0, chars.length()).mapToObj(i -> "" + chars.charAt(i))
+				.collect(Collectors.joining());
+		return str;
+	}
+	
+	public String generateNumberInString(int lenght) {
+		int length = 0 ;
+		String chars = "12345678910111213141516171819202122232425262728293031"
+				+ "333343536373839404142434445464748495051525355";
+
+		String str = new Random().ints(length, 0, chars.length()).mapToObj(i -> "" + chars.charAt(i))
+				.collect(Collectors.joining());
+		return str;
+	}
+	
+	public String generateOneNumberInString() {
+		int length = 1;
+		String chars = "12345678910111213141516171819202122232425262728293031"
+				+ "333343536373839404142434445464748495051525355";
+
+		String str = new Random().ints(length, 0, chars.length()).mapToObj(i -> "" + chars.charAt(i))
+				.collect(Collectors.joining());
+		return str;
+	}
+
+
+	/**
+	 * Maximize browser screen to fit current resolution.
+	 * 
+	 * @author Stefan Lazarevic
+	 * @since <i>Version 1.0</i>
+	 * @return WebDriverExtended
+	 */
+	public WebDriverExtended maximizeBrowser() {
+		driver.manage().window().maximize();
+		System.err.println("JSL INFO: Maximizing browser window. " + getCurrentTime());
+		return this;
+	}
+
+
+	/**
+	 * Focusing main screen.
+	 * 
+	 * @author Stefan Lazarevic
+	 * @since <i>Version 1.0</i>
+	 * @return WebDriverExtended
+	 */
+	public WebDriverExtended focus() {
+		driver.switchTo().defaultContent();
+		System.err.println("JSL INFO: Focusing main screen. " + getCurrentTime());
+		return this;
+	}
+
+
+	// TERMINATING ***********************************************************
+
+	/**
+	 * Closing web browser.
+	 * 
+	 * @author Stefan Lazarevic
+	 * @since <i>Version 1.0</i>
+	 */
+	public void close() {
+		if (driver != null) {
+			driver.close();
+			je = null;
+			quit();
+		}
+	}
+
+	/**
+	 * Closing web browser and terminating Web Driver.
+	 * 
+	 * @author Stefan Lazarevic
+	 * @since <i>Version 1.0</i>
+	 */
+	public void quit() {
+		driver.quit();
+		if (isDriverDead()) {
+			System.err.println("JSL INFO: Driver successfully quit");
+		}
+	}
+
+	public boolean isDriverDead() {
+		return driver.toString().contains("(null)");
+	}
+
+
+	// HTML GETTERS
+	// *******************************************************************
+
+	/**
+	 * @author Stefan Lazarevic
+	 * @since <i>Version 1.0</i>
+	 * @return Title from current web page.
+	 */
+	public String getTitle() {
+		return driver.getTitle();
+	}
+
+	/**
+	 * @author Stefan Lazarevic
+	 * @since <i>Version 1.0</i>
+	 * @return URL from active web page.
+	 */
+	public String getActiveURL() {
+		return driver.getCurrentUrl();
+	}
+
+	/**
+	 * Searching for text inside the HTML page source.
+	 * 
+	 * @author Stefan Lazarevic
+	 * @since <i>Version 1.0</i>
+	 * @param
+	 * @return Text found status (True or False)
+	 */
+	public boolean isTextPresent(String text) {
+		return driver.getPageSource().contains(text);
+	}
+
+	/**
+	 * Useful for checking, check boxes and radio buttons.
+	 * 
+	 * @author Stefan Lazarevic
+	 * @since <i>Version 1.0</i>
+	 * @param element
+	 * @return boolean value if element is selected.
+	 */
+	public boolean isElementSelected(By element) {
+		return driver.findElement(element).isSelected();
+	}
+	
+	
+	public WebDriverExtended type3(By element, String value) {
+		clickableElement(element).click();
+		clickableElement(element).clear();
+		clickableElement(element).sendKeys(value);
+		return this;
+	}
+
+	@Override
+	public WebElement findElement(By arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<WebElement> findElements(By arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void get(String arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getCurrentUrl() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getPageSource() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getWindowHandle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<String> getWindowHandles() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Options manage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Navigation navigate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TargetLocator switchTo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	
+	
+}

@@ -1,0 +1,27 @@
+package glavni;
+
+import java.util.Scanner;
+
+public class Krug {
+
+	public static void main(String[] args) {
+
+		Scanner sc = new Scanner(System.in);
+
+		double r, pi, povrsina, obim;
+		  pi = 3.14;
+		  
+		  System.out.println("Unesite poluprecnik :"); 
+		  r = sc.nextDouble();
+		  if(r>0) {
+			  povrsina = r * r * pi;
+		      obim = 2*r*pi;
+			  System.out.println("Povrsina kruga je = " + povrsina);
+			  System.out.println("Obim kruga je = " + obim);
+		  }
+		  else {
+			  System.out.println("Uneli ste nevazecu vrednost poluprecnika !");
+		  }
+		  
+	}
+}
